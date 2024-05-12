@@ -1,0 +1,8 @@
+<!--pages/test2/test2.wxml-->
+<!-- <text>pages/test2/test2.wxml</text> -->
+
+<!-- npm i async-validator  表单验证的组件 -->
+
+<view class="box">
+  <button type="warn" plain size="mini" bindtap="onValidator"> 验证数据</button>
+</view>

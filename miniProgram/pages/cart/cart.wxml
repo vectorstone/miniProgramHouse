@@ -1,0 +1,96 @@
+<view>
+  <!-- 购物车列表结构 -->
+  <view
+    wx:if="{{ cartList.length }}"
+    class="container goods-wrap"
+    bindtap="onSwipeCellPage"
+  >
+    <view class="goods-item" wx:for="{{ cartList }}" wx:key="index">
+      <van-swipe-cell
+        class="goods-swipe"
+        right-width="{{ 65 }}"
+        id="swipe-cell-{{ item.goodsId }}"
+        bind:open="swipeCellOpen"
+        bind:click="onSwipeCellClick"
+      >
+        <van-cell-group border="{{ false }}">
+          <view class="goods-info">
+            <view class="left">
+              <van-checkbox
+                checked-color="#FA4126"
+                value="{{ item.isChecked }}"
+                bind:change="updateChecked"
+                data-id="{{item.goodsId}}"
+                data-index="{{index}}"
+              ></van-checkbox>
+            </view>
+            <view class="mid">
+              <image class="img" src="{{ item.imageUrl }}" />
+            </view>
+            <view class="right">
+              <view class="title"> {{ item.name }} </view>
+              <view class="buy">
+                <view class="price">
+                  <view class="symbol">¥</view>
+                  <view class="num">{{ item.price }}</view>
+                </view>
+                <view class="buy-btn">
+                  <van-stepper
+                    value="{{ item.count }}"
+                    integer
+                    min="1"
+                    max="200"
+                    data-id="{{item.goodsId}}"
+                    data-oldbuynum="{{ item.count }}"
+                    data-index="{{ index }}"
+                    bindchange="changeBuyNum"
+                  />
+                </view>
+              </view>
+            </view>
+          </view>
+        </van-cell-group>
+        <view
+          slot="right"
+          class="van-swipe-cell__right"
+          bindtap="delCartGoods"
+          data-id="{{ item.goodsId }}"
+          >删除</view
+        >
+      </van-swipe-cell>
+    </view>
+  </view>
+
+  <!-- 购物车列表为空展示的结构 -->
+  <van-empty wx:else description="{{ emptyDes }}">
+    <navigator
+      url="/pages/index/index"
+      wx:if="{{ token && cardList.length === 0 }}"
+      open-type="switchTab"
+    >
+      <van-button round type="danger" class="bottom-button">去购物</van-button>
+    </navigator>
+
+    <navigator url="/pages/login/login" wx:else>
+      <van-button round type="danger" class="bottom-button">去登录</van-button>
+    </navigator>
+  </van-empty>
+
+  <!-- 底部工具栏 -->
+  <!-- 底部工具栏组件展示价格,默认是以 分 的形式进行展示,如果要以元的方式进行展示,需要乘以 100 -->
+  <van-submit-bar
+    bindsubmit="toOrder"
+    wx:if="{{ cartList.length }}"
+    price="{{ totalPrice * 100}}"
+    button-text="去结算"
+    tip="{{ true }}"
+  >
+    <van-checkbox
+      value="{{ selectAllStatus }}"
+      checked-color="#FA4126"
+      bind:change="updateAllStatus"
+    >
+      全选
+    </van-checkbox>
+  </van-submit-bar>
+</view>
