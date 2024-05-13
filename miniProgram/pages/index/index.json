@@ -4,5 +4,6 @@
     "entrance": "./entrance/entrance",
     "banner": "./banner/banner"
   },
-  "navigationBarTitleText": "租个房"
+  "navigationBarTitleText": "租个房",
+  "enablePullDownRefresh": true
 }

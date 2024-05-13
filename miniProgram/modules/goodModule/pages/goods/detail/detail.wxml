@@ -1,24 +1,47 @@
 <view class="container goods-detail">
   <!-- 商品大图 -->
   <view class="banner-img">
-    <image class="img" src="{{goodsInfo.imageUrl}}" bindtap="previewImg" />
+    <image
+      class="img"
+      src="../../../../../assets/mockImages/house.png"
+      bindtap="previewImg"
+    />
   </view>
 
   <!-- 商品的基本信息 -->
   <view class="content">
     <view class="price">
-      <view class="price-num">¥{{goodsInfo.price}}</view>
-      <view class="price-origin-num">¥{{goodsInfo.marketPrice}}</view>
+      <view class="price-num">¥{{house.rent}}</view>
+      <view class="price-origin-num">¥{{house.rent + 300}}</view>
     </view>
-    <view class="title">{{goodsInfo.name}}</view>
-    <view class="desc">{{goodsInfo.material}}</view>
+    <!-- 地铁线路 -->
+    <view class="title">地铁线路: {{house.subway}}</view>
+    <!-- 小区名称 -->
+    <view class="desc">小区名称: {{house.community}}</view>
+    <!-- 楼栋及房间号 -->
+    <view class="desc">楼栋及房间号: {{house.roomNumber}}</view>
+    <view class="desc">房间情况: {{house.orientation}}</view>
+    <!-- 更新时间 -->
+    <view class="desc">更新于: {{house.updateTime}}</view>
   </view>
 
   <!-- 商品的详细信息 -->
-  <view class="detail" wx:for="{{goodsInfo.detailList}}" wx:key="index">
-    <image class="img" mode="widthFix" src="{{item}}" />
-    <!-- <image class="img" mode="widthFix" src="/assets/images/floor-img.jpg" />
-    <image class="img" mode="widthFix" src="/assets/images/floor-img.jpg" /> -->
+  <view class="detail" wx:for="{{house.houseAttachment}}" wx:key="id">
+    <image
+      wx:if="{{item.contentType !== 1}}"
+      class="img"
+      mode="widthFix"
+      src="{{item.url}}"
+      bindtap="previewImg"
+    />
+    <video
+      wx:else
+      class="img"
+      src="{{item.url}}"
+      muted
+      enable-auto-rotation
+      direction
+    ></video>
   </view>
 
   <!-- 商品的底部商品导航 -->
@@ -26,18 +49,22 @@
     <navigator url="/pages/index/index" open-type="switchTab">
       <van-goods-action-icon icon="wap-home-o" text="首页" />
     </navigator>
-    <navigator url="/pages/cart/cart" open-type="switchTab">
-      <!-- info就是购物车上方的红色的数量角标 -->
+    <!-- <navigator url="/pages/cart/cart" open-type="switchTab">
+      info就是购物车上方的红色的数量角标
       <van-goods-action-icon icon="cart-o" text="购物车" info="{{ allCount }}" />
-    </navigator>
-    <van-goods-action-icon
+    </navigator> -->
+    <!-- <van-goods-action-icon
       open-type="contact"
       icon="chat-o"
       text="客服"
       bind:click="onClickIcon"
+    /> -->
+    <van-goods-action-button
+      text="滴滴获取更多信息"
+      type="warning"
+      bindtap="handleAddcart"
     />
-    <van-goods-action-button text="加入购物车" type="warning" bindtap="handleAddcart" />
-    <van-goods-action-button text="立即购买" bindtap="handeGotoBuy" />
+    <!-- <van-goods-action-button text="立即购买" bindtap="handeGotoBuy" /> -->
   </van-goods-action>
 
   <!-- 加入购物车、立即购买弹框 -->
@@ -48,18 +75,18 @@
       <view class="goods-item">
         <!-- 需要购买的商品图片 -->
         <view class="mid">
-          <image class="img" src="{{goodsInfo.imageUrl}}" />
+          <image class="img" src="{{house.imageUrl}}" />
         </view>
 
         <!-- 商品基本信息 -->
         <view class="right">
           <!-- 商品名字 -->
-          <view class="title"> {{goodsInfo.name}} </view>
+          <view class="title"> {{house.name}} </view>
           <!-- 商品价格 -->
           <view class="buy">
             <view class="price">
               <view class="symbol">¥</view>
-              <view class="num">{{goodsInfo.price}}</view>
+              <view class="num">{{house.price}}</view>
             </view>
 
             <!-- 步进器组件控制购买数量 -->
@@ -79,7 +106,7 @@
       </view>
 
       <!-- 祝福语输入框 -->
-      <view class="time-wraper">
+      <!-- <view class="time-wraper">
         <view class="title">祝福语</view>
         <textarea
           model:value="{{ blessing }}"
@@ -88,12 +115,12 @@
           placeholder="必填，写上您的祝福语，给心爱的他（她）送上你的祝福（请勿填写特殊符号或表情符号）"
           name="textarea"
         />
-      </view>
+      </view> -->
 
       <!-- 确定按钮 -->
-      <view class="sheet-footer-btn">
+      <!-- <view class="sheet-footer-btn">
         <van-button block type="primary" round bindtap="handleSubmit"> 确定 </van-button>
-      </view>
+      </view> -->
     </view>
   </van-action-sheet>
 </view>

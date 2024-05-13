@@ -10,7 +10,12 @@ Page({
     guessList: [], // 猜你喜欢
     loading: true,
     houseList: [],
-    total: 0
+    total: 0,
+    isLoading: false, // 用来判断数据是否加载完毕
+    isFinish: false, // 判断数据是否加载完毕
+    // 房源列表请求参数
+    page: 1, // 页码
+    limit: 4 // 每页请求的条数
   },
 
   // 监听页面的加载
@@ -20,32 +25,77 @@ Page({
     this.getHouseListData()
   },
 
+  // 上拉加载更多的功能
+  onReachBottom() {
+    const { houseList, total, isLoading, page } = this.data
+
+    // 判断是否加载完毕,如果isLoading 等于true
+    // 说明数据还没有加载完毕,不加载下一页的数据
+    if (isLoading) return
+
+    // 判断数据是否加载完毕
+    if (total === houseList.length) {
+      // 如果相等,说明数据已经加载完毕
+      // 如果数据加载完毕,需要给用户提示,同时不继续加载下一个数据
+      this.setData({
+        isFinish: true
+      })
+      return
+    }
+
+    // 对页码进行 + 1 的操作
+    this.setData({
+      page: page + 1
+    })
+
+    // 重新发送请求
+    this.getHouseListData()
+  },
+
+  // 监听页面的下拉刷新
+  onPullDownRefresh() {
+    // 将数据进行重置
+    this.setData({
+      houseList: [],
+      total: 0,
+      isFinish: false,
+      page: 1
+    })
+
+    // 重新获取数据
+    this.getHouseListData()
+  },
+
   async getHouseDetail() {
     const res = await getHouseDetail('1777925917874634753')
   },
   async getHouseListData() {
-    const res = await getHouseList(1, 10)
-    console.log(res)
-    // const houseAttachment = JSON.parse(indexHouseJson)
+    // 数据真正的请求中
+    this.data.isLoading = true
+    const res = await getHouseList(this.data.page, this.data.limit)
+
+    // 数据加载完毕
+    this.data.isLoading = false
+
     this.setData({
-      title: res.data.items.total,
-      houseList: res.data.items.records,
+      total: res.data.items.total,
+      houseList: [...this.data.houseList, ...res.data.items.records],
       bannerList: houseAttachment
     })
   },
-  async getIndexData() {
-    const res = await reqIndexData()
-    // console.log(res)
-    this.setData({
-      houseList: res[0].data.items.records,
-      bannerList: res[1].data.item,
-      categoryList: res[1].data,
-      activeList: res[2].data,
-      guessList: res[3].data,
-      hotList: res[4].data,
-      loading: false
-    })
-  },
+  // async getIndexData() {
+  //   const res = await reqIndexData()
+  //   // console.log(res)
+  //   this.setData({
+  //     houseList: res[0].data.items.records,
+  //     bannerList: res[1].data.item,
+  //     categoryList: res[1].data,
+  //     activeList: res[2].data,
+  //     guessList: res[3].data,
+  //     hotList: res[4].data,
+  //     loading: false
+  //   })
+  // },
 
   // async getIndexData() {
   //   // 调用接口API函数,获取数据

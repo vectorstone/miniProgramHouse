@@ -14,13 +14,14 @@
 
   <!-- 查看更多 -->
   <view class="goods_more">
-    <navigator
+    <!-- <navigator
       class="goods_more_btn"
       url="/modules/goodModule/pages/goods/list/list"
       hover-class="navigator-hover"
       open-type="navigate"
     >
       查看更多
-    </navigator>
+    </navigator> -->
+    <view class="goods_more_btn">上拉加载更多</view>
   </view>
 </view>

@@ -10,7 +10,7 @@
 
 // 商品大图
 .banner-img {
-  height: 800rpx;
+  height: 500rpx;
 
   image {
     height: 100%;
@@ -25,7 +25,7 @@
   position: relative;
   border-radius: 18rpx;
   top: -80px;
-  height: 170rpx;
+  // height: 170rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -58,7 +58,7 @@
   }
 
   .desc {
-    font-size: 12px;
+    font-size: 14px;
     color: #999999;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -71,6 +71,9 @@
   margin: -130rpx 16rpx 100rpx;
   background: white;
   padding: 20rpx 16rpx;
+  border-radius: 16rpx;
+}
+.img {
   border-radius: 16rpx;
 }
 

@@ -46,7 +46,9 @@
     </view> -->
 
     <!-- 商品列表 -->
-    <goods-list title="猜你喜欢" list="{{houseList}}"></goods-list>
-    <goods-list title="人气推荐" list="{{hotList}}"></goods-list>
+    <goods-list title="最新房源推荐" list="{{houseList}}"></goods-list>
+    <!-- <goods-list title="人气推荐" list="{{hotList}}"></goods-list> -->
+    <!-- 数据是否加载完毕 -->
+    <view class="finish" hidden="{{ !isFinish }}">数据加载完毕~~~</view>
   </view>
 </view>
