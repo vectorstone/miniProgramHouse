@@ -8,13 +8,15 @@
     <!-- <image class="good_img" src="{{goodItem.houseAttachment[0].url}}" mode="widthFix" /> -->
     <video class="good_img" src="{{goodItem.houseAttachment[0].url}}"></video>
 
-    <!-- 商品详细信息 -->
+    <!-- 房子详细信息 -->
     <view class="goods_item_info">
-      <!-- 商品名称 -->
-      <text class="goods_item_info_name">{{goodItem.community}}</text>
-      <!-- 商品描述 -->
+    <!-- 地铁线路 -->
+    <text class="goods_item_info_name">{{goodItem.subway}}</text>
+      <!-- 小区名称 -->
+      <text class="goods_item_info_community">{{goodItem.community}}</text>
+      <!-- 房间朝向 -->
       <text class="goods_item_info_promo">{{goodItem.orientation}}</text>
-      <!-- 商品价格 -->
+      <!-- 租金 -->
       <view class="goods_item_info_bottom">
         <view class="goods_item_info_price">
           <text class="text">¥</text>{{goodItem.rent}}
@@ -23,9 +25,9 @@
           <text class="text">¥</text> {{goodItem.rent + 300}}
         </view>
         <!-- 加入购物车图片 -->
-        <view class="goods_item_info_btn">
+        <!-- <view class="goods_item_info_btn">
           <image class="goods_image" src="/assets/images/buybtn.png" mode="" />
-        </view>
+        </view> -->
       </view>
     </view>
   </navigator>

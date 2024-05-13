@@ -29,6 +29,15 @@
   white-space: nowrap;
 }
 
+.goods_item_info_community {
+  font-weight: 350;
+  font-size: 25rpx;
+  line-height: 20px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
 .goods_item_info .goods_item_info_promo {
   padding-top: 20rpx;
   padding-bottom: 3px;

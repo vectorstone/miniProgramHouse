@@ -14,7 +14,8 @@
     <banner bannerList="{{ bannerList }}" />
 
     <!-- 导航分类 -->
-    <entrance cateList="{{categoryList}}" />
+    <!-- 这个地方到时候做成几个不同地铁线路的房子 -->
+    <!-- <entrance cateList="{{categoryList}}" /> -->
 
     <!-- 广告区域 -->
     <!-- <view class="adver">
@@ -22,7 +23,7 @@
         <navigator
           url="/modules/goodModule/pages/goods/list/list?category2Id={{activeList[0].category2Id}}"
         >
-          <image src="{{activeList[0].imageUrl}}" mode="widthFix" />
+          <image src="{{bannerList[0].url}}" mode="widthFix" />
         </navigator>
       </view>
 
@@ -31,14 +32,14 @@
           <navigator
             url="/modules/goodModule/pages/goods/list/list?category2Id={{activeList[1].category2Id}}"
           >
-            <image src="{{activeList[1].imageUrl}}" mode="widthFix" />
+            <image src="{{bannerList[1].url}}" mode="widthFix" />
           </navigator>
         </view>
         <view>
           <navigator
             url="/modules/goodModule/pages/goods/list/list?category2Id={{activeList[2].category2Id}}"
           >
-            <image src="{{activeList[2].imageUrl}}" mode="widthFix" />
+            <image src="{{bannerList[2].url}}" mode="widthFix" />
           </navigator>
         </view>
       </view>

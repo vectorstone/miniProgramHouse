@@ -27,10 +27,12 @@ export const reqIndexData = () => {
 
   // 方式2: 通过自己封装的并发all方法来
   return http.all(
-    http.get('/index/findBanner'),
-    http.get('/index/findCategory1'),
-    http.get('/index/advertisement'),
-    http.get('/index/findListGoods'),
-    http.get('/index/findRecommendGoods')
+    http.post(`/admin/house/1/10`),
+    http.post(`/admin/house/1777925917874634753`)
+    // http.get('/index/findBanner'),
+    // http.get('/index/findCategory1'),
+    // http.get('/index/advertisement'),
+    // http.get('/index/findListGoods'),
+    // http.get('/index/findRecommendGoods')
   )
 }

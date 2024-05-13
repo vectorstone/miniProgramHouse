@@ -1,4 +1,5 @@
-import { reqIndexData, getHouseList } from '../../api/index'
+import { reqIndexData, getHouseList, getHouseDetail } from '@/api/index'
+import { houseAttachment } from '@/api/mockData'
 Page({
   // 初始化数据
   data: {
@@ -19,12 +20,30 @@ Page({
     this.getHouseListData()
   },
 
+  async getHouseDetail() {
+    const res = await getHouseDetail('1777925917874634753')
+  },
   async getHouseListData() {
     const res = await getHouseList(1, 10)
     console.log(res)
+    // const houseAttachment = JSON.parse(indexHouseJson)
     this.setData({
       title: res.data.items.total,
-      houseList: res.data.items.records
+      houseList: res.data.items.records,
+      bannerList: houseAttachment
+    })
+  },
+  async getIndexData() {
+    const res = await reqIndexData()
+    // console.log(res)
+    this.setData({
+      houseList: res[0].data.items.records,
+      bannerList: res[1].data.item,
+      categoryList: res[1].data,
+      activeList: res[2].data,
+      guessList: res[3].data,
+      hotList: res[4].data,
+      loading: false
     })
   },
 
