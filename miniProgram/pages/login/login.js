@@ -34,11 +34,11 @@ ComponentWithStore({
       this.setToken(token)
       // 获取用户信息
       // 将用户信息存储到本地
-      setStorage('userInfo', data.sysUser)
-      setStorage('userPermsList', data.userPermsList)
+      setStorage('userInfo', res.data.sysUser)
+      setStorage('userPermsList', res.data.sysUser.userPermsList)
       // 将用户信息存储到Store对象中
-      this.setUserInfo(data.sysUser)
-      this.setUserPermsList(data.userPermsList)
+      this.setUserInfo(res.data.sysUser)
+      this.setUserPermsList(res.data.sysUser.userPermsList)
 
       // 登录成功并获取用户的信息成功之后,需要返回上一级的页面
       wx.navigateBack()

@@ -27,6 +27,15 @@ ComponentWithStore({
     show: false
   },
   methods: {
+    navigationToLogin() {
+      this.setData({
+        show: false
+      })
+      wx.navigateTo({
+        url: '/pages/login/login',
+      })
+    
+    },
     // 点击关闭弹框时触发的回调
     onClose() {
       this.setData({ show: false })
