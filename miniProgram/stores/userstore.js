@@ -11,6 +11,8 @@ export const userStore = observable({
   // 用户信息
   userInfo: getStorage('userInfo') || {},
 
+  userPermsList: getStorage('userPermsList') || [],
+
   // 定义action
   // setToken 用来修改,更新token
   setToken: action(function (token) {
@@ -21,5 +23,10 @@ export const userStore = observable({
   // 对用户信息进行赋值
   setUserInfo: action(function (userInfo) {
     this.userInfo = userInfo
+  }),
+
+  setUserPermsList: action(function (userPermsList) {
+    this.userPermsList = userPermsList
   })
+  
 })

@@ -26,9 +26,10 @@ instance.interceptors.request = (config) => {
   // 如果存在token,就需要在请求头中添加token字段
   if (token) {
     config.header['token'] = token
-  } else {
-    config.header['token'] = 'c0ab721460d340fbb12a28cd2de6b3f7'
   }
+  // else {
+  //   config.header['token'] = '536b5d29d2ad4d58ad70154ca7e2176e'
+  // }
   return config
 }
 

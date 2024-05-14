@@ -19,11 +19,11 @@ Page({
   previewImg() {
     // 调用预览图片的 API
     const houseAttachments = this.data.house.houseAttachment
-    console.log(houseAttachments)
+    // console.log(houseAttachments)
     const medias = houseAttachments
       .filter((item) => item.contentType === 0)
       .map((item) => item.url)
-    console.log(medias)
+    // console.log(medias)
     wx.previewImage({
       urls: medias
     })

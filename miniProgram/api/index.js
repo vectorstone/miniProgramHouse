@@ -1,6 +1,9 @@
 // 导入封装的网络请求模块实例
 import http from '../utils/http'
 
+export const getSharedHouse = (shareId) => {
+  return http.get('/admin/house/shareHouse?shareId=' + shareId)
+}
 /**
  * @description 获取首页的轮播图数据
  */
