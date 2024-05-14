@@ -2,7 +2,7 @@
 // 导入封装通用模块方法
 import { toast } from '../../utils/extendApi'
 // 导入接口 API 函数
-import { reqLogin, reqUserInfo, myLogin } from '@/api/user'
+import { reqLogin, reqUserInfo, myLogin, wxLogin } from '@/api/user'
 // 导入本地存储 api
 import { setStorage } from '../../utils/storage'
 // 导入ComponentWithStore方法
@@ -20,49 +20,43 @@ ComponentWithStore({
     fields: ['token', 'userInfo', 'userPermsList'],
     actions: ['setToken', 'setUserInfo', 'setUserPermsList']
   },
+  data: {
+    encryptedData:'',
+    iv: ''
+  },
   methods: {
     login: debounce(async function () {
-      // 先执行自己的登录的接口
-      const res = await myLogin({
-        password: 'wxg741852',
-        username: 'gavin'
+      wx.login({
+        success: async ({ code }) => {
+          console.log('code', code)
+          if (code) {
+            // 在获取到临时登录凭证 code 以后,需要传递给开发者服务器
+            // 先执行自己的登录的接口
+            // const res = await myLogin({
+            //   password: 'wxg741852',
+            //   username: 'gavin'
+            // })
+            const res = await wxLogin(code)
+            console.log(res)
+            const { token } = res.data
+            setStorage('token', token)
+            // 将自定义登录态token 存储到Store对象
+            this.setToken(token)
+            // 获取用户信息
+            // 将用户信息存储到本地
+            setStorage('userInfo', res.data.sysUser)
+            setStorage('userPermsList', res.data.sysUser.userPermsList)
+            // 将用户信息存储到Store对象中
+            this.setUserInfo(res.data.sysUser)
+            this.setUserPermsList(res.data.sysUser.userPermsList)
+
+            // 登录成功并获取用户的信息成功之后,需要返回上一级的页面
+            wx.navigateBack()
+          } else {
+            toast({ title: '授权失败,请重新登录' })
+          }
+        }
       })
-      console.log(res)
-      const { token } = res.data
-      setStorage('token', token)
-      // 将自定义登录态token 存储到Store对象
-      this.setToken(token)
-      // 获取用户信息
-      // 将用户信息存储到本地
-      setStorage('userInfo', res.data.sysUser)
-      setStorage('userPermsList', res.data.sysUser.userPermsList)
-      // 将用户信息存储到Store对象中
-      this.setUserInfo(res.data.sysUser)
-      this.setUserPermsList(res.data.sysUser.userPermsList)
-
-      // 登录成功并获取用户的信息成功之后,需要返回上一级的页面
-      wx.navigateBack()
-
-      // wx.login({
-      //   success: async ({ code }) => {
-      //     if (code) {
-      //       // 在获取到临时登录凭证 code 以后,需要传递给开发者服务器
-      //       const res = await reqLogin(code)
-      //       console.log(res)
-      //       const { token } = res.data
-      //       setStorage('token', token)
-      //       // 将自定义登录态token 存储到Store对象
-      //       this.setToken(token)
-      //       // 获取用户信息
-      //       this.getUserInfo()
-
-      //       // 登录成功并获取用户的信息成功之后,需要返回上一级的页面
-      //       wx.navigateBack()
-      //     } else {
-      //       toast({ title: '授权失败,请重新登录' })
-      //     }
-      //   }
-      // })
     }, 500),
 
     // 获取用户信息

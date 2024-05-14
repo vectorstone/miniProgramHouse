@@ -1,6 +1,12 @@
 // 导入封装的网络请求模块实例
 import http from '../utils/http'
 
+/**
+ * 专门为微信小程序登录准备的接口
+ * @param {*} code 
+ */
+export const wxLogin = (code) => http.get('/admin/user/wxLogin?code=' + code)
+
 export const myLogin = (data) => {
   return http.post('/admin/user/login',data)
 }
