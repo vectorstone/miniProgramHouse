@@ -32,9 +32,8 @@ ComponentWithStore({
         show: false
       })
       wx.navigateTo({
-        url: '/pages/login/login',
+        url: '/pages/login/login'
       })
-    
     },
     // 点击关闭弹框时触发的回调
     onClose() {
@@ -104,27 +103,30 @@ ComponentWithStore({
       // 数据真正的请求中
       this.data.isLoading = true
 
-      if (this.data.token) {
-        const res = await getHouseList(this.data.page, this.data.limit)
-        // 数据加载完毕
-        this.data.isLoading = false
-
-        this.setData({
-          total: res.data.items.total,
-          houseList: [...this.data.houseList, ...res.data.items.records],
-          bannerList: houseAttachment
-        })
-      } else {
-        // 没有登录的话就调用另外一个接口
-        const res = await getSharedHouse('1790252748083113985')
-        // 数据加载完毕
-        this.data.isLoading = false
-
-        this.setData({
-          houseList: [...this.data.houseList, ...res.data.houses],
-          bannerList: houseAttachment
-        })
+      if (!this.data.token) {
+        // 如果没有登录的话,只查询6条数据(后端的分页查询接口需要添加白名单,感觉不安全)
       }
+      const res = await getHouseList(this.data.page, this.data.limit)
+      // 数据加载完毕
+      this.data.isLoading = false
+
+      this.setData({
+        total: res.data.items.total,
+        houseList: [...this.data.houseList, ...res.data.items.records],
+        bannerList: houseAttachment
+      })
+
+      // else {
+      //   // 没有登录的话就调用另外一个接口
+      //   const res = await getSharedHouse('1790252748083113985')
+      //   // 数据加载完毕
+      //   this.data.isLoading = false
+
+      //   this.setData({
+      //     houseList: [...this.data.houseList, ...res.data.houses],
+      //     bannerList: houseAttachment
+      //   })
+      // }
     },
     // async getIndexData() {
     //   const res = await reqIndexData()

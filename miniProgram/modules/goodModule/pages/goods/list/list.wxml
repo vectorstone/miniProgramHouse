@@ -2,8 +2,8 @@
 
 <view class="container">
   <!-- 商品列表功能 -->
-  <view class="goods-list" wx:if="{{goodsList.length}}">
-    <block wx:for="{{goodsList}}" wx:key="id">
+  <view class="goods-list" wx:if="{{houseList.length}}">
+    <block wx:for="{{houseList}}" wx:key="id">
       <goods-card goodItem="{{item}}"></goods-card>
       <!-- <goods-card></goods-card>
       <goods-card></goods-card>

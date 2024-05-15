@@ -1,0 +1,27 @@
+/* pages/share/share.wxss */
+.input-name {
+  border: 1px solid #ccc;
+  margin: 40rpx 40rpx;
+  height: 60rpx;
+  line-height: 60rpx;
+  border-radius: 16rpx;
+  padding: 6rpx 12rpx;
+  padding-left: 20rpx;
+}
+
+.more {
+  margin: 20rpx 0;
+}
+
+.goods_more_btn {
+  display: block;
+  margin: 0 auto;
+  background: rgb(122, 196, 138);
+  border-radius: 8px;
+  height: 40px;
+  width: 370px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 14px;
+  color: rgba(21, 67, 95, 0.7);
+}

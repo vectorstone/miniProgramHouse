@@ -1,0 +1,17 @@
+<!--pages/share/share.wxml-->
+<view>
+  <view class="row">
+    <!-- <text class="title">收货人</text> -->
+    <input class="input-name" model:value="{{shareId}}" placeholder-style="color: #969799" placeholder="请输入shareId" />
+  </view>
+
+  <!-- <button url="">跳转到分享页面</button> -->
+  <view class="more">
+    <!-- 这个地方也可以使用navigator组件,但是这样的话就没有办法校验是否有输入对应的shareId了 -->
+    <!-- <navigator class="goods_more_btn" url="/modules/goodModule/pages/goods/list/list?shareId={{shareId}}" hover-class="navigator-hover" open-type="navigate">
+      进入分享页面
+    </navigator> -->
+    <button class="goods_more_btn" bindtap="navigateToShare">进入分享页面</button>
+  </view>
+  <!-- /modules/goodModule/pages/goods/list/list -->
+</view>

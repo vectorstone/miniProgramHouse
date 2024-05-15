@@ -9,7 +9,8 @@
     "pages/login/login",
     "pages/settings/settings",
     "pages/test/test",
-    "pages/test2/test2"
+    "pages/test2/test2",
+    "pages/share/share"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -22,8 +23,7 @@
     "selectedColor": "#FF734C",
     "backgroundColor": "#ffffff",
     "borderStyle": "black",
-    "list": [
-      {
+    "list": [{
         "pagePath": "pages/index/index",
         "text": "首页",
         "iconPath": "assets/tabbar/index.png",
@@ -69,8 +69,7 @@
     "van-goods-action-button": "@vant/weapp/goods-action-button/index"
   },
   "sitemapLocation": "sitemap.json",
-  "subPackages": [
-    {
+  "subPackages": [{
       "root": "modules/settingModule",
       "name": "settingModule",
       "pages": [
@@ -83,32 +82,48 @@
     {
       "root": "modules/goodModule",
       "name": "goodModule",
-      "pages": ["pages/goods/list/list", "pages/goods/detail/detail"]
+      "pages": [
+        "pages/goods/list/list",
+        "pages/goods/detail/detail"
+      ]
     },
     {
       "root": "modules/orderPayModule",
       "name": "orderPayModule",
-      "pages": ["pages/order/detail/detail", "pages/order/list/list"]
+      "pages": [
+        "pages/order/detail/detail",
+        "pages/order/list/list"
+      ]
     }
   ],
   "preloadRule": {
     "modules/orderPayModule/pages/order/detail/detail": {
       "network": "all",
-      "packages": ["settingModule"]
+      "packages": [
+        "settingModule"
+      ]
     },
     "pages/my/my": {
       "network": "all",
-      "packages": ["settingModule"]
+      "packages": [
+        "settingModule"
+      ]
     },
     "pages/category/category": {
       "network": "all",
-      "packages": ["goodModule"]
+      "packages": [
+        "goodModule"
+      ]
     },
     "pages/cart/cart": {
       "network": "all",
-      "packages": ["orderPayModule"]
+      "packages": [
+        "orderPayModule"
+      ]
     }
   },
-  "resolveAlias": { "@/*": "/*" },
+  "resolveAlias": {
+    "@/*": "/*"
+  },
   "lazyCodeLoading": "requiredComponents"
 }

@@ -1,6 +1,6 @@
 // pages/goods/list/index.js
 import { reqGetGoodsList, reqGetGoodsDetail } from '@/api/goods'
-
+import { getSharedHouse } from '@/api/index'
 Page({
   /**
    * 页面的初始数据
@@ -16,14 +16,24 @@ Page({
       category1Id: '', // 一级分类 id
       category2Id: '' // 二级分类 id
     },
-    isLoading: false // 用来判断数据是否加载完毕
+    isLoading: false, // 用来判断数据是否加载完毕
+    houseList: []
   },
   onLoad(options) {
     // options长这样 {category1Id: "1"}
-    // Object.assign 用来合并对象,后面对象的属性会往前进行合并
-    Object.assign(this.data.requestData, options)
-    this.getGoodsList()
+    this.shareId = options.shareId
+    
+    this.getShareHouseInfo()
   },
+  async getShareHouseInfo() {
+    // 没有登录的话就调用另外一个接口
+    const res = await getSharedHouse(this.shareId)
+    
+    this.setData({
+      houseList: res.data.houses
+    })
+  },
+
   async getGoodsList() {
     // 数据真正的请求中
     this.data.isLoading = true
@@ -84,8 +94,8 @@ Page({
   // 转发功能
   onShareAppMessage() {
     return {
-      title: '所有的怦然心动，都是你',
-      path: '/pages/index/index',
+      title: '对方向你丢来了一堆房子,请及时查看',
+      path: '/modules/goodModule/pages/goods/list/list?shareId=' + this.shareId,
       imageUrl: '../../assets/images/love.jpg'
     }
   },
