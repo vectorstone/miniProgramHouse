@@ -27,6 +27,7 @@ Page({
     const phoneReg = '^1(?:3\\d|4[4-9]|5[0-35-9]|6[67]|7[0-8]|8\\d|9\\d)\\d{8}$'
 
     const numberReg = '^[1-9]d*$'
+    const nubmerReg2 = '\\d+'
     // 创建验证规则
     // 定义验证规则
     const rules = {
@@ -34,7 +35,7 @@ Page({
       shareId: [
         { required: true, message: 'shareId不能为空' },
         // { type: 'number', message: 'shareId必须是数字' }
-        { pattern: numberReg, message: 'shareId必须是数字' }
+        { pattern: nubmerReg2, message: 'shareId必须是数字' }
       ]
     }
 

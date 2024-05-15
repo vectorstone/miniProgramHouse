@@ -32,19 +32,20 @@
 
     <!-- 订单面板 -->
     <view class="order section">
-      <view class="order-title-wrap">
+      <navigator class="share" url="/pages/share/share">前往分享页面</navigator>
+      <!-- <view class="order-title-wrap">
         <text class="title">我的订单</text>
         <text class="more">查看更多></text>
       </view>
 
       <view class="order-content-wrap">
-        <view class="order-content-item" wx:for="{{ initpanel }}">
+        <view class="order-content-item" wx:for="{{ initpanel }}" wx:key="id">
           <navigator url="{{ token ?  item.url : '/pages/login/login' }}">
             <view class="iconfont {{ item.iconfont }}"></view>
             <text>{{ item.title }}</text>
           </navigator>
         </view>
-      </view>
+      </view> -->
     </view>
 
     <!-- 关于售前售后服务面板 -->
@@ -62,11 +63,11 @@
       </view>
       <view class="after-scale-item">
         <view class="iconfont icon-dizhiguanli"></view>
-        <text>鲜花制作完毕情况下暂不支持退款</text>
+        <text>房源信息可能时时都在变化,请以最新的信息为准</text>
       </view>
       <view class="after-scale-item">
         <view class="iconfont icon-zhangben"></view>
-        <text>鲜花可以提前7-15天预订重大节假日不支持定时配送</text>
+        <text>需要看房请务必提前1-2小时联系,谢谢!</text>
       </view>
     </view>
 

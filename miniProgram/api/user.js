@@ -33,8 +33,8 @@ export const reqUserInfo = () => {
  * @param {*} name 文件对应的key
  * @returns Promise
  */
-export const reqUploadFile = (filePath, name) => {
-  return http.upload('/fileUpload', filePath, name)
+export const reqUploadFile = (filePath, file) => {
+  return http.upload('/api/oss/userInfo/upload', filePath, file)
 }
 
 /**
@@ -42,6 +42,6 @@ export const reqUploadFile = (filePath, name) => {
  * @param {*} userInfo 最新的头像和昵称
  * @returns Promise
  */
-export const reqUpdateUserInfo = (userInfo) => {
-  return http.post('/weixin/updateUser', userInfo)
+export const reqUpdateUserInfo = (name,headUrl) => {
+  return http.get(`/admin/user/update/userInfo?name=${name}&headUrl=${headUrl}`)
 }

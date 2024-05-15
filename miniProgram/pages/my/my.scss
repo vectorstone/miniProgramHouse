@@ -12,6 +12,19 @@
   }
 }
 
+.share {
+  display: block;
+  margin: 0 auto;
+  background: rgb(122, 196, 138);
+  border-radius: 8px;
+  height: 40px;
+  width: 370px;
+  line-height: 40px;
+  text-align: center;
+  font-size: 14px;
+  color: rgba(21, 67, 95, 0.7);
+}
+
 .bottom-show {
   margin: 0 16rpx;
 

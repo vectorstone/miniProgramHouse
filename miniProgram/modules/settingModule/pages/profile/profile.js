@@ -12,7 +12,10 @@ Page({
   },
 
   async updateUserInfo() {
-    const res = await reqUpdateUserInfo(this.data.userInfo)
+    const res = await reqUpdateUserInfo(
+      this.data.userInfo.name,
+      this.data.userInfo.headUrl
+    )
     if (res.code === 200) {
       // 用户信息更新成功之后,需要将最新的用户信息存储到本地
       setStorage('userInfo', this.data.userInfo)
@@ -29,7 +32,7 @@ Page({
   onUpdateNickName() {
     this.setData({
       isShowPopup: true,
-      'userInfo.nickname': this.data.userInfo.nickname
+      'userInfo.name': this.data.userInfo.name
     })
   },
 
@@ -43,21 +46,21 @@ Page({
     console.log(event)
     const { avatarUrl } = event.detail
 
-    const { data } = await reqUploadFile(avatarUrl, 'file')
+    const res = await reqUploadFile(avatarUrl, 'file')
 
-    console.log(data)
+    console.log(res)
 
     this.setData({
       // 更新的userstore里面的信息
-      'userInfo.headimgurl': data
+      'userInfo.headUrl': res.data.filePath
     })
   },
   updateNickName(event) {
     // console.log(event)
-    const { nickname } = event.detail.value
+    const { nickname:name } = event.detail.value
     this.setData({
       // 更新的userstore里面的信息
-      'userInfo.nickname': nickname,
+      'userInfo.name': name,
       // 隐藏弹窗
       isShowPopup: false
     })

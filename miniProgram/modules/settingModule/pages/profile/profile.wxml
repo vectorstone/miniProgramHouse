@@ -8,14 +8,14 @@
         open-type="chooseAvatar"
         bindchooseavatar="chooseAvatar"
       >
-        <image src="{{ userInfo.headimgurl || '/assets/images/avatar.png' }}" />
+        <image src="{{ userInfo.headUrl || '/assets/images/avatar.png' }}" />
       </button>
     </view>
   </view>
 
   <view class="setting-list nickname" bindtap="onUpdateNickName">
     <text>昵称</text>
-    <text>{{ userInfo.nickname || 'xxx' }}</text>
+    <text>{{ userInfo.name || 'xxx' }}</text>
   </view>
 
   <view class="footer">
@@ -41,7 +41,7 @@
         type="nickname"
         name="nickname"
         class="input-name"
-        value="{{ userInfo.nickname }}"
+        value="{{ userInfo.name }}"
       />
       <view class="dialog-content">
         <!-- 给按钮添加 form-type 属性,如果属性值是reset,就是重置表单 -->

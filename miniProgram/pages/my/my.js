@@ -16,16 +16,19 @@ ComponentWithStore({
     // 初始化第二个面板数据
     initpanel: [
       {
+        id: 1,
         url: '/modules/orderPayModule/pages/order/list/list',
         title: '商品订单',
         iconfont: 'icon-dingdan'
       },
       {
+        id: 2,
         url: '/modules/orderPayModule/pages/order/list/list',
         title: '礼品卡订单',
         iconfont: 'icon-lipinka'
       },
       {
+        id: 3,
         url: '/modules/orderPayModule/pages/order/list/list',
         title: '退款/售后',
         iconfont: 'icon-tuikuan'

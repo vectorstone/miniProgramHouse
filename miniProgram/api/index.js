@@ -1,6 +1,11 @@
 // 导入封装的网络请求模块实例
 import http from '../utils/http'
 
+/**
+ * @description 未登录的时候,允许用户获取8条房源的信息
+ */
+export const getHouseInfoUnLogin = () => http.get('/admin/house/unLogin/houseInfo')
+
 export const getSharedHouse = (shareId) => {
   return http.get('/admin/house/shareHouse?shareId=' + shareId)
 }

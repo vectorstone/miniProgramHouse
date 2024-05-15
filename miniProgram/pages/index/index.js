@@ -1,4 +1,10 @@
-import { reqIndexData, getHouseList, getHouseDetail, getSharedHouse } from '@/api/index'
+import {
+  reqIndexData,
+  getHouseList,
+  getHouseDetail,
+  getSharedHouse,
+  getHouseInfoUnLogin
+} from '@/api/index'
 import { houseAttachment } from '@/api/mockData'
 
 import { userStore } from '@/stores/userstore'
@@ -23,7 +29,7 @@ ComponentWithStore({
     isFinish: false, // 判断数据是否加载完毕
     // 房源列表请求参数
     page: 1, // 页码
-    limit: 4, // 每页请求的条数
+    limit: 10, // 每页请求的条数
     show: false
   },
   methods: {
@@ -38,6 +44,9 @@ ComponentWithStore({
     // 点击关闭弹框时触发的回调
     onClose() {
       this.setData({ show: false })
+    },
+    onShow() {
+      this.getHouseListData()
     },
 
     // 监听页面的加载
@@ -105,60 +114,24 @@ ComponentWithStore({
 
       if (!this.data.token) {
         // 如果没有登录的话,只查询6条数据(后端的分页查询接口需要添加白名单,感觉不安全)
+        const res = await getHouseInfoUnLogin()
+        this.data.isLoading = false
+        this.setData({
+          total: res.data.houses.length,
+          houseList: res.data.houses,
+          bannerList: houseAttachment
+        })
+      } else {
+        const res = await getHouseList(this.data.page, this.data.limit)
+        // 数据加载完毕
+        this.data.isLoading = false
+        this.setData({
+          total: res.data.items.total,
+          houseList: [...this.data.houseList, ...res.data.items.records],
+          bannerList: houseAttachment
+        })
       }
-      const res = await getHouseList(this.data.page, this.data.limit)
-      // 数据加载完毕
-      this.data.isLoading = false
-
-      this.setData({
-        total: res.data.items.total,
-        houseList: [...this.data.houseList, ...res.data.items.records],
-        bannerList: houseAttachment
-      })
-
-      // else {
-      //   // 没有登录的话就调用另外一个接口
-      //   const res = await getSharedHouse('1790252748083113985')
-      //   // 数据加载完毕
-      //   this.data.isLoading = false
-
-      //   this.setData({
-      //     houseList: [...this.data.houseList, ...res.data.houses],
-      //     bannerList: houseAttachment
-      //   })
-      // }
     },
-    // async getIndexData() {
-    //   const res = await reqIndexData()
-    //   // console.log(res)
-    //   this.setData({
-    //     houseList: res[0].data.items.records,
-    //     bannerList: res[1].data.item,
-    //     categoryList: res[1].data,
-    //     activeList: res[2].data,
-    //     guessList: res[3].data,
-    //     hotList: res[4].data,
-    //     loading: false
-    //   })
-    // },
-
-    // async getIndexData() {
-    //   // 调用接口API函数,获取数据
-    //   // reqIndexData 内部使用的 all 或者 Promise.all
-    //   // 返回的是一个数组,是按照接口的调用顺序返回的
-    //   const res = await reqIndexData()
-    //   console.log(res)
-
-    //   // 需要对数据进行赋值,在赋值的时候,一定要注意索引
-    //   this.setData({
-    //     bannerList: res[0].data,
-    //     categoryList: res[1].data,
-    //     activeList: res[2].data,
-    //     guessList: res[3].data,
-    //     hotList: res[4].data,
-    //     loading: false
-    //   })
-    // },
 
     // 转发功能
     onShareAppMessage() {
