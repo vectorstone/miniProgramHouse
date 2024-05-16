@@ -9,7 +9,7 @@ import { env } from './env'
 const instance = new WxRequest({
   // baseURL: 'https://gmall-prod.atguigu.cn/mall-api',
   // baseURL: env.baseURL, // 先不用这个env的配置,方便自己本地和线上进行调试
-  baseURL: 'http://39.100.105.236:8888',
+  baseURL: 'http://www.nicehouse.cc:8888',
   // baseURL: 'http://localhost:8888',
   timeout: 15000
   // 如果整个项目里面都不希望使用loading的效果,可以在进行实例化的时候传入isLoading为false

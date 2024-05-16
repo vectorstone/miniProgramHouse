@@ -44,7 +44,7 @@ Page({
     // 1777925917874634753 wendy 横板视频
     // const res = await getHouseDetail('1777925917874634753')
     // 1780103377428987905 竖版视频
-    const res = await getHouseDetail('1780103377428987905')
+    const res = await getHouseDetail(this.houseId)
     console.log(res)
     const { item: house } = res.data
     console.log(house)

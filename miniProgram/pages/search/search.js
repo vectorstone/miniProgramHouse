@@ -105,21 +105,44 @@ const subwayDetail = [
         id: 32
       },
       {
-        text: '港城',
+        text: '港城路',
         id: 33
       }
     ]
   }
 ]
+import { ComponentWithStore } from 'mobx-miniprogram-bindings'
+const computedBehavior = require('miniprogram-computed').behavior
+import { userStore } from '@/stores/userstore'
+ComponentWithStore({
+  // 注册计算属性
+  behaviors: [computedBehavior],
 
-Page({
+  storeBindings: {
+    store: userStore,
+    fields: ['token', 'userPermsList']
+  },
+
+  computed: {
+    // 判断是否全选
+    // computed 函数中不能访问 this ，只有 data 对象可供访问
+    // 这个函数的返回值会被设置到 this.data.selectAllStatus 字段中,也就是挂在到 data 对象中
+    isAdmin(data) {
+      // 计算属性,用来判断是否是管理员
+      return data.userPermsList.includes('bnt.house.list')
+    }
+  },
+
   data: {
     // 自己的数据
     keyword: '',
+    landloardName: '',
+    houseId: '',
 
     // treeSelect的数据
     mainActiveIndex: 0,
-    activeId: null,
+    activeId: [],
+    max: 2,
     subwayDetail,
     // treeSelect的数据
 
@@ -137,63 +160,76 @@ Page({
     itemTitleSubway: '地铁线路',
     itemTitleRent: '租金范围',
     option1: [
-      { text: '全部商品', value: 0 },
-      { text: '新款商品', value: 1 },
-      { text: '活动商品', value: 2 }
+      { text: '0-1000', value: 0 },
+      { text: '1000-1500', value: 1 },
+      { text: '1500-2000', value: 2 },
+      { text: '2000-2500', value: 3 },
+      { text: '2500-3000', value: 4 },
+      { text: '3000-3500', value: 5 },
+      { text: '3500-4000', value: 6 },
+      { text: '4000-10000', value: 7 }
     ],
     value1: 0
     // 下拉菜单
   },
 
-  // DropdownMenu下拉菜单
-  onConfirm() {
-    this.selectComponent('#item').toggle()
-  },
+  methods: {
+    // DropdownMenu下拉菜单
+    onConfirm() {
+      this.selectComponent('#item').toggle()
+    },
 
-  onSwitch1Change({ detail }) {
-    this.setData({ switch1: detail })
-  },
+    onSwitch1Change({ detail }) {
+      this.setData({ switch1: detail })
+    },
 
-  onSwitch2Change({ detail }) {
-    this.setData({ switch2: detail })
-  },
+    onSwitch2Change({ detail }) {
+      this.setData({ switch2: detail })
+    },
+    // DropdownMenu下拉菜单
 
-  // DropdownMenu下拉菜单
+    // TreeSelect分类选择
+    onClickNav({ detail = {} }) {
+      this.setData({
+        mainActiveIndex: detail.index || 0
+      })
+    },
 
-  // TreeSelect分类选择
-  onClickNav({ detail = {} }) {
-    this.setData({
-      mainActiveIndex: detail.index || 0
-    })
-  },
+    onClickItem({ detail = {} }) {
+      const { activeId } = this.data
 
-  onClickItem({ detail = {} }) {
-    const activeId = this.data.activeId === detail.id ? null : detail.id
+      const index = activeId.indexOf(detail.id)
+      if (index > -1) {
+        activeId.splice(index, 1)
+      } else {
+        activeId.push(detail.id)
+      }
 
-    this.setData({ activeId })
-  },
-  // TreeSelect分类选择
+      this.setData({ activeId })
+    },
+    // TreeSelect分类选择
 
-  // 搜索的组件
-  onSearch(e) {
-    console.log('用户搜索   ' + e.detail)
-  },
+    // 搜索的组件
+    onSearch(e) {
+      console.log('用户搜索   ' + e.detail)
+    },
 
-  onClick() {
-    this.setData({
-      show: true
-    })
-  },
+    onClick() {
+      this.setData({
+        show: true
+      })
+    },
 
-  onClose() {
-    this.setData({
-      show: false
-    })
-  },
-  // 搜索的组件
+    onClose() {
+      this.setData({
+        show: false
+      })
+    },
+    // 搜索的组件
 
-  /**
-   * Called when user click on the top right corner to share
-   */
-  onShareAppMessage() {}
+    /**
+     * Called when user click on the top right corner to share
+     */
+    onShareAppMessage() {}
+  }
 })

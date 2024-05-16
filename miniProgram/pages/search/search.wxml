@@ -1,76 +1,49 @@
 <view>
-  <!-- 下面的这个搜索框也可以使用,但是不是特别的好看 -->
-  <!-- <searchHaveHistory id="history" bind:searchEvent="searchEvent">
-  </searchHaveHistory> -->
-
-
+  <!-- 搜索输入框 -->
   <view>
-    <van-search model:value="{{ keyword }}" placeholder="请输入小区 或 地铁 . . ." bind:search="onSearch" />
+    <van-search
+      model:value="{{ keyword }}"
+      placeholder="请输入小区 或 地铁 . . ."
+      bind:search="onSearch"
+      use-action-slot
+    >
+      <view class="onClick" slot="action" bind:tap="onClick">搜索</view>
+    </van-search>
+
+    <van-search
+      wx:if="{{ isAdmin }}"
+      model:value="{{ landloardName }}"
+      placeholder="请输入房东姓名 . . ."
+      bind:search="onSearch"
+    />
+    <van-search
+      wx:if="{{ isAdmin }}"
+      model:value="{{ houseId }}"
+      placeholder="请输入houseId"
+      bind:search="onSearch"
+    />
   </view>
-
-
-  <!-- <view>
-    <van-field value="{{ fieldValue }}" is-link readonly label="地铁" placeholder="请选择所在地区" bind:tap="onClick" />
-    <van-popup show="{{ show }}" round position="bottom">
-      <van-cascader wx:if="{{ show }}" value="{{ cascaderValue }}" title="请选择所在地区" options="{{ options }}" bind:close="onClose" bind:finish="onFinish" />
-    </van-popup>
-  </view> -->
-
-  <!-- <van-popup show="{{ show }}" round position="bottom">
-    <view>
-      <van-tree-select items="{{ items }}" main-active-index="{{ mainActiveIndex }}" active-id="{{ activeId }}" bind:click-nav="onClickNav" bind:click-item="onClickItem" />
-    </view>
-  </van-popup> -->
-  <!-- <view>
-    <van-tree-select items="{{ items }}" main-active-index="{{ mainActiveIndex }}" active-id="{{ activeId }}" bind:click-nav="onClickNav" bind:click-item="onClickItem" />
-  </view> -->
-
-  <!-- <view>
-    <van-dropdown-menu>
-      <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}">
-        <view>
-
-          <van-tree-select items="{{ items }}" main-active-index="{{ mainActiveIndex }}" active-id="{{ activeId }}" bind:click-nav="onClickNav" bind:click-item="onClickItem" />
-
-        </view>
-      </van-dropdown-item>
-      <van-dropdown-item value="{{ value2 }}" options="{{ option2 }}" />
-
-
-    </van-dropdown-menu>
-  </view> -->
-
 
   <van-dropdown-menu>
     <!-- <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" /> -->
-
     <van-dropdown-item id="item" title="{{ itemTitleSubway }}">
-
       <view>
-        <van-tree-select items="{{ subwayDetail }}" main-active-index="{{ mainActiveIndex }}" active-id="{{ activeId }}" bind:click-nav="onClickNav" bind:click-item="onClickItem" />
-      </view>
-
-    </van-dropdown-item>
-
-    <van-dropdown-item id="item" title="{{ itemTitleRent }}">
-
-    </van-dropdown-item>
-
-    <van-dropdown-item id="item" title="{{ itemTitle }}">
-      <van-cell title="{{ switchTitle1 }}">
-        <van-switch slot="right-icon" size="24px" style="height: 26px" checked="{{ switch1 }}" active-color="#ee0a24" bind:change="onSwitch1Change" />
-      </van-cell>
-      <van-cell title="{{ switchTitle2 }}">
-        <van-switch slot="right-icon" size="24px" style="height: 26px" checked="{{ switch2 }}" active-color="#ee0a24" bind:change="onSwitch2Change" />
-      </van-cell>
-      <view style="padding: 5px 16px;">
-        <van-button type="danger" block round bind:click="onConfirm">
-          确认
-        </van-button>
+        <van-tree-select
+          items="{{ subwayDetail }}"
+          main-active-index="{{ mainActiveIndex }}"
+          active-id="{{ activeId }}"
+          bind:click-nav="onClickNav"
+          bind:click-item="onClickItem"
+        />
       </view>
     </van-dropdown-item>
 
+    <van-dropdown-item
+      id="item"
+      title="{{ itemTitleRent }}"
+      value="{{ value1 }}"
+      options="{{ option1 }}"
+    >
+    </van-dropdown-item>
   </van-dropdown-menu>
-
-
 </view>
