@@ -20,9 +20,9 @@
     <!-- 登录以后得面板 -->
     <view class="user-container section" wx:else>
       <view class="avatar-container">
-        <image src="{{userInfo.headimgurl}}"></image>
+        <image src="{{userInfo.headUrl}}"></image>
         <view class="no-login">
-          <text class="ellipsis">{{userInfo.nickname}}</text>
+          <text class="ellipsis">{{userInfo.name}}</text>
         </view>
       </view>
       <view class="setting">

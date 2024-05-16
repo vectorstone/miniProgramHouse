@@ -1,0 +1,27 @@
+<view>
+  <!-- 下面的这个搜索框也可以使用,但是不是特别的好看 -->
+  <!-- <searchHaveHistory id="history" bind:searchEvent="searchEvent">
+  </searchHaveHistory> -->
+
+
+  <view>
+    <van-search model:value="{{ keyword }}" placeholder="请输入小区 或 地铁 . . ." bind:search="onSearch" />
+  </view>
+  <view>
+    <van-field value="{{ fieldValue }}" is-link readonly label="地铁" placeholder="请选择所在地区" bind:tap="onClick" />
+    <van-popup show="{{ show }}" round position="bottom">
+      <van-cascader wx:if="{{ show }}" value="{{ cascaderValue }}" title="请选择所在地区" options="{{ options }}" bind:close="onClose" bind:finish="onFinish" />
+    </van-popup>
+  </view>
+
+  <!-- <van-popup show="{{ show }}" round position="bottom">
+    <view>
+      <van-tree-select items="{{ items }}" main-active-index="{{ mainActiveIndex }}" active-id="{{ activeId }}" bind:click-nav="onClickNav" bind:click-item="onClickItem" />
+    </view>
+  </van-popup> -->
+  <view>
+    <van-tree-select items="{{ items }}" main-active-index="{{ mainActiveIndex }}" active-id="{{ activeId }}" bind:click-nav="onClickNav" bind:click-item="onClickItem" />
+  </view>
+
+
+</view>

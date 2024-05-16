@@ -10,7 +10,8 @@
     "pages/settings/settings",
     "pages/test/test",
     "pages/test2/test2",
-    "pages/share/share"
+    "pages/share/share",
+    "pages/search/search"
   ],
   "window": {
     "backgroundTextStyle": "light",
@@ -32,6 +33,12 @@
       {
         "pagePath": "pages/category/category",
         "text": "分类",
+        "iconPath": "assets/tabbar/cate.png",
+        "selectedIconPath": "assets/tabbar/cate-active.png"
+      },
+      {
+        "pagePath": "pages/search/search",
+        "text": "搜索",
         "iconPath": "assets/tabbar/cate.png",
         "selectedIconPath": "assets/tabbar/cate-active.png"
       },

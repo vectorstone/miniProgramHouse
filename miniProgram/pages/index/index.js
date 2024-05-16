@@ -105,29 +105,29 @@ ComponentWithStore({
       this.getHouseListData()
     },
 
-    async getHouseDetail() {
-      const res = await getHouseDetail('1777925917874634753')
-    },
     async getHouseListData() {
       // 数据真正的请求中
       this.data.isLoading = true
 
       if (!this.data.token) {
-        // 如果没有登录的话,只查询6条数据(后端的分页查询接口需要添加白名单,感觉不安全)
+        // 如果没有登录的话,只查询6条数据(后端的分页查询接口需m要添加白名单,感觉不安全)
         const res = await getHouseInfoUnLogin()
+        const houseList = res.data.houses.filter((item) => item.houseStatus === 0)
         this.data.isLoading = false
         this.setData({
           total: res.data.houses.length,
-          houseList: res.data.houses,
+          houseList,
           bannerList: houseAttachment
         })
       } else {
         const res = await getHouseList(this.data.page, this.data.limit)
         // 数据加载完毕
+        const houseList = res.data.items.records.filter((item) => item.houseStatus === 0)
         this.data.isLoading = false
         this.setData({
           total: res.data.items.total,
-          houseList: [...this.data.houseList, ...res.data.items.records],
+          // houseList: [...this.data.houseList, ...res.data.items.records],
+          houseList: [...this.data.houseList, ...houseList],
           bannerList: houseAttachment
         })
       }
