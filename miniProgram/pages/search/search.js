@@ -91,14 +91,14 @@ const subwayDetail = [
 ]
 
 const rentRange = [
-  { text: '0-1000', value: 0 },
-  { text: '1000-1500', value: 1 },
-  { text: '1500-2000', value: 2 },
-  { text: '2000-2500', value: 3 },
-  { text: '2500-3000', value: 4 },
-  { text: '3000-3500', value: 5 },
-  { text: '3500-4000', value: 6 },
-  { text: '4000-10000', value: 7 }
+  { text: '0-1000元', value: 0 },
+  { text: '1000-1500元', value: 1 },
+  { text: '1500-2000元', value: 2 },
+  { text: '2000-2500元', value: 3 },
+  { text: '2500-3000元', value: 4 },
+  { text: '3000-3500元', value: 5 },
+  { text: '3500-4000元', value: 6 },
+  { text: '4000-10000元', value: 7 }
 ]
 import { ComponentWithStore } from 'mobx-miniprogram-bindings'
 const computedBehavior = require('miniprogram-computed').behavior
@@ -172,11 +172,17 @@ ComponentWithStore({
 
   methods: {
     // DropdownMenu下拉菜单
-    rentSelect({ detail = {} }) {
-      console.log(detail)
-    },
-    change(detail) {
-      console.log(detail)
+    // 对应的wxml里面应该这样写 bind:change="change" 不是bind:tap="change"
+    change(options) {
+      const { detail } = options
+      // options里面的detail是对应的子选项的value
+      // console.log(options)
+
+      // 根据获取到的 value 方向的来获取对应的项目的 text
+      const rent = this.data.rentRange.find((item) => item.value === detail)
+      this.setData({
+        searchVo: { ...this.data.searchVo, rentRange: rent.text }
+      })
     },
 
     onConfirm() {

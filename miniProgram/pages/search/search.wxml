@@ -19,7 +19,7 @@
     </van-dropdown-item>
 
     <!-- 租金范围 -->
-    <van-dropdown-item id="item" title="{{ itemTitleRent }}" value="{{ value1 }}" options="{{ rentRange }}" bind:tap="change">
+    <van-dropdown-item id="item" title="{{ itemTitleRent }}" value="{{ value1 }}" options="{{ rentRange }}" bind:change="change">
     </van-dropdown-item>
   </van-dropdown-menu>
 </view>
