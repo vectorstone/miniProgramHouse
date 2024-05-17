@@ -13,6 +13,8 @@ export const userStore = observable({
 
   userPermsList: getStorage('userPermsList') || [],
 
+  roleList: getStorage('roleList') || [],
+
   // 定义action
   // setToken 用来修改,更新token
   setToken: action(function (token) {
@@ -27,6 +29,10 @@ export const userStore = observable({
 
   setUserPermsList: action(function (userPermsList) {
     this.userPermsList = userPermsList
+  }),
+
+  setRoleList: action(function (roleList){
+    this.roleList = roleList
   })
   
 })

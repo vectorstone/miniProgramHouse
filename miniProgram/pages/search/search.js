@@ -103,13 +103,20 @@ const rentRange = [
 import { ComponentWithStore } from 'mobx-miniprogram-bindings'
 const computedBehavior = require('miniprogram-computed').behavior
 import { userStore } from '@/stores/userstore'
+import {
+  reqIndexData,
+  getHouseList,
+  getHouseDetail,
+  getSharedHouse,
+  getHouseInfoUnLogin
+} from '@/api/index'
 ComponentWithStore({
   // 注册计算属性
   behaviors: [computedBehavior],
 
   storeBindings: {
     store: userStore,
-    fields: ['token', 'userPermsList']
+    fields: ['token', 'userPermsList', 'roleList']
   },
 
   computed: {
@@ -118,7 +125,8 @@ ComponentWithStore({
     // 这个函数的返回值会被设置到 this.data.selectAllStatus 字段中,也就是挂在到 data 对象中
     isAdmin(data) {
       // 计算属性,用来判断是否是管理员
-      return data.userPermsList.includes('bnt.house.list')
+      // return data.userPermsList.includes('bnt.house.list')
+      return data.roleList.find((item) => item.roleCode === 'SYSTEM')
     }
   },
 
@@ -166,11 +174,45 @@ ComponentWithStore({
     itemTitleSubway: '地铁线路',
     itemTitleRent: '租金范围',
     rentRange,
-    value1: 0
+    value1: 0,
     // 下拉菜单
+    isLoading: false,
+    page: 1,
+    limit: 8,
+    houseList: []
   },
 
   methods: {
+    async getHouseListData() {
+      // 数据真正的请求中
+      this.data.isLoading = true
+
+      if (!this.data.token) {
+        // 如果没有登录的话,只查询6条数据(后端的分页查询接口需m要添加白名单,感觉不安全)
+        const res = await getHouseInfoUnLogin()
+        const houseList = res.data.houses.filter((item) => item.houseStatus === 0)
+        this.data.isLoading = false
+        this.setData({
+          total: res.data.houses.length,
+          houseList
+        })
+      } else {
+        const res = await getHouseList(
+          this.data.page,
+          this.data.limit,
+          this.data.searchVo
+        )
+        // 数据加载完毕
+        const houseList = res.data.items.records.filter((item) => item.houseStatus === 0)
+        this.data.isLoading = false
+        this.setData({
+          total: res.data.items.total,
+          // houseList: [...this.data.houseList, ...res.data.items.records],
+          houseList: [...this.data.houseList, ...houseList]
+        })
+      }
+    },
+
     // DropdownMenu下拉菜单
     // 对应的wxml里面应该这样写 bind:change="change" 不是bind:tap="change"
     change(options) {
@@ -225,7 +267,17 @@ ComponentWithStore({
       console.log('用户搜索   ' + e.detail)
     },
 
-    onClick() {
+    onChange(event) {
+      const {detail:community} = event
+      this.setData({
+        searchVo: {...this.data.searchVo,community}
+      })
+    },
+
+    onClick(options) {
+      console.log(options)
+
+      this.getHouseListData()
       this.setData({
         show: true
       })

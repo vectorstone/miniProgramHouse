@@ -18,8 +18,8 @@ export const getSharedHouse = (shareId) => {
 // 也可以简写成下面的样子,有点像lambda表达式的简写
 // export const reqSwiperData = () => http.get('/index/findBanner')
 
-export const getHouseList = (pageNum, pageSize) => {
-  return http.post(`/admin/house/${pageNum}/${pageSize}`)
+export const getHouseList = (pageNum, pageSize,searchVo) => {
+  return http.post(`/admin/house/${pageNum}/${pageSize}`,searchVo)
 }
 
 // 获取首页数据

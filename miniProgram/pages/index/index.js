@@ -120,7 +120,7 @@ ComponentWithStore({
           bannerList: houseAttachment
         })
       } else {
-        const res = await getHouseList(this.data.page, this.data.limit)
+        const res = await getHouseList(this.data.page, this.data.limit,null)
         // 数据加载完毕
         const houseList = res.data.items.records.filter((item) => item.houseStatus === 0)
         this.data.isLoading = false

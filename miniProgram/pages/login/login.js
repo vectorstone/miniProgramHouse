@@ -17,8 +17,8 @@ ComponentWithStore({
   // 让页面和 Store 对象建立关联
   storeBindings: {
     store: userStore,
-    fields: ['token', 'userInfo', 'userPermsList'],
-    actions: ['setToken', 'setUserInfo', 'setUserPermsList']
+    fields: ['token', 'userInfo', 'userPermsList','roleList'],
+    actions: ['setToken', 'setUserInfo', 'setUserPermsList','setRoleList']
   },
   data: {
     encryptedData:'',
@@ -46,9 +46,11 @@ ComponentWithStore({
             // 将用户信息存储到本地
             setStorage('userInfo', res.data.sysUser)
             setStorage('userPermsList', res.data.sysUser.userPermsList)
+            setStorage('roleList',res.data.sysUser.roleList)
             // 将用户信息存储到Store对象中
             this.setUserInfo(res.data.sysUser)
             this.setUserPermsList(res.data.sysUser.userPermsList)
+            this.setRoleList(res.data.sysUser.roleList)
 
             // 登录成功并获取用户的信息成功之后,需要返回上一级的页面
             wx.navigateBack()
