@@ -1,26 +1,4 @@
 // pages/search/search.js
-const options = [
-  {
-    text: '浙江省',
-    value: '330000',
-    children: [{ text: '杭州市', value: '330100' }]
-  },
-  {
-    text: '江苏省',
-    value: '320000',
-    children: [{ text: '南京市', value: '320100' }]
-  },
-  {
-    text: '12号线',
-    value: '12',
-    children: [
-      { text: '巨峰路', value: '1210' },
-      { text: '杨高北路', value: '1220' },
-      { text: '东陆路', value: '1230' }
-    ]
-  }
-]
-
 const subwayDetail = [
   {
     text: '12号线',
@@ -111,6 +89,17 @@ const subwayDetail = [
     ]
   }
 ]
+
+const rentRange = [
+  { text: '0-1000', value: 0 },
+  { text: '1000-1500', value: 1 },
+  { text: '1500-2000', value: 2 },
+  { text: '2000-2500', value: 3 },
+  { text: '2500-3000', value: 4 },
+  { text: '3000-3500', value: 5 },
+  { text: '3500-4000', value: 6 },
+  { text: '4000-10000', value: 7 }
+]
 import { ComponentWithStore } from 'mobx-miniprogram-bindings'
 const computedBehavior = require('miniprogram-computed').behavior
 import { userStore } from '@/stores/userstore'
@@ -134,6 +123,24 @@ ComponentWithStore({
   },
 
   data: {
+    // 搜索的对象构建
+    searchVo: {
+      community: '',
+      endRent: 0,
+      fileType: 0,
+      houseStatus: 0,
+      id: '',
+      landlordName: '',
+      orientation: '',
+      remark: '',
+      // 2000-2500元
+      rentRange: '',
+      roomNumber: '',
+      startRent: 0,
+      subway: '',
+      subways: []
+    },
+
     // 自己的数据
     keyword: '',
     landloardName: '',
@@ -148,7 +155,6 @@ ComponentWithStore({
 
     // castar的数据
     show: false,
-    options,
     fieldValue: '',
     cascaderValue: '',
     // castar的数据
@@ -159,43 +165,39 @@ ComponentWithStore({
     itemTitle: '筛选',
     itemTitleSubway: '地铁线路',
     itemTitleRent: '租金范围',
-    option1: [
-      { text: '0-1000', value: 0 },
-      { text: '1000-1500', value: 1 },
-      { text: '1500-2000', value: 2 },
-      { text: '2000-2500', value: 3 },
-      { text: '2500-3000', value: 4 },
-      { text: '3000-3500', value: 5 },
-      { text: '3500-4000', value: 6 },
-      { text: '4000-10000', value: 7 }
-    ],
+    rentRange,
     value1: 0
     // 下拉菜单
   },
 
   methods: {
     // DropdownMenu下拉菜单
+    rentSelect({ detail = {} }) {
+      console.log(detail)
+    },
+    change(detail) {
+      console.log(detail)
+    },
+
     onConfirm() {
       this.selectComponent('#item').toggle()
     },
 
-    onSwitch1Change({ detail }) {
-      this.setData({ switch1: detail })
-    },
-
-    onSwitch2Change({ detail }) {
-      this.setData({ switch2: detail })
-    },
     // DropdownMenu下拉菜单
 
     // TreeSelect分类选择
     onClickNav({ detail = {} }) {
+      // console.log(detail)
       this.setData({
         mainActiveIndex: detail.index || 0
       })
     },
 
     onClickItem({ detail = {} }) {
+      // {text: "巨峰路", id: 12}
+      // console.log(detail)
+      this.data.searchVo.subways.push(detail.text)
+
       const { activeId } = this.data
 
       const index = activeId.indexOf(detail.id)
@@ -205,7 +207,10 @@ ComponentWithStore({
         activeId.push(detail.id)
       }
 
-      this.setData({ activeId })
+      this.setData({
+        activeId,
+        searchVo: { ...this.data.searchVo, ...this.data.searchVo.subways }
+      })
     },
     // TreeSelect分类选择
 
