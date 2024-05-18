@@ -9,6 +9,20 @@
     "miniprogram": {
       "list": [
         {
+          "name": "/pages/test2/test2",
+          "pathName": "/pages/test2/test2",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
+          "name": "detail",
+          "pathName": "modules/goodModule/pages/goods/detail/detail",
+          "query": "houseId=1787701813574184962",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/search/search",
           "pathName": "pages/search/search",
           "query": "",
@@ -28,15 +42,9 @@
           "query": "",
           "launchMode": "default",
           "scene": null
-        },
-        {
-          "name": "modules/goodModule/pages/goods/detail/detail",
-          "pathName": "modules/goodModule/pages/goods/detail/detail",
-          "query": "houseId=1787701813574184962",
-          "launchMode": "default",
-          "scene": null
         }
       ]
     }
-  }
+  },
+  "libVersion": "3.4.2"
 }

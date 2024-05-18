@@ -51,3 +51,13 @@
     </van-dropdown-item>
   </van-dropdown-menu>
 </view>
+
+<!-- <view class="house" wx:for="{{houseList}}" wx:key="id">
+    <van-card
+      num="2"
+      price="{{item.rent}}"
+      desc="{{item.subway}}"
+      title="{{item.community}}"
+      thumb="{{ imageURL }}"
+    />
+  </view> -->

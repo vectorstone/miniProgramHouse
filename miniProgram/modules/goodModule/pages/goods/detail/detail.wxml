@@ -1,7 +1,11 @@
 <view class="container goods-detail">
   <!-- 商品大图 -->
   <view class="banner-img">
-    <image class="img" src="../../../../../assets/mockImages/house.png" bindtap="previewImg" />
+    <image
+      class="img"
+      src="../../../../../assets/mockImages/house.png"
+      bindtap="previewImg"
+    />
   </view>
 
   <!-- 商品的基本信息 -->
@@ -23,8 +27,15 @@
 
   <!-- 商品的详细信息 -->
   <view class="detail" wx:for="{{house.houseAttachment}}" wx:key="id">
-    <image wx:if="{{item.contentType !== 1}}" class="img" mode="widthFix" src="{{item.url}}" bindtap="previewImg" />
-    <video wx:else class="videos" src="{{item.url}}" muted enable-auto-rotation direction></video>
+    <image
+      wx:if="{{item.contentType !== 1}}"
+      class="img"
+      mode="widthFix"
+      src="{{item.url}}"
+      bindtap="previewImg"
+    />
+    <!-- <video wx:else class="videos" src="{{item.url}}" muted enable-auto-rotation direction bindplay="bp" id="myVideo"></video> -->
+    <video wx:else class="videos" src="{{item.url}}" direction></video>
   </view>
 
   <!-- 商品的底部商品导航 -->
@@ -42,7 +53,11 @@
       text="客服"
       bind:click="onClickIcon"
     /> -->
-    <van-goods-action-button text="滴滴获取更多信息" type="warning" bindtap="handleAddcart" />
+    <van-goods-action-button
+      text="滴滴获取更多信息"
+      type="warning"
+      bindtap="handleAddcart"
+    />
     <!-- <van-goods-action-button text="立即购买" bindtap="handeGotoBuy" /> -->
   </van-goods-action>
 
@@ -72,7 +87,13 @@
             <!-- 加入购物车0,立即购买1,立即购买的时候不允许多个商品,所以需要隐藏 -->
             <view class="buy-btn" wx:if="{{buyNow === 0}}">
               <!-- Stepper 步进器，由增加按钮、减少按钮和输入框组成，控制购买数量 -->
-              <van-stepper value="{{ count }}" integer min="1" max="200" bind:change="onChangeGoodsCount" />
+              <van-stepper
+                value="{{ count }}"
+                integer
+                min="1"
+                max="200"
+                bind:change="onChangeGoodsCount"
+              />
             </view>
           </view>
         </view>
