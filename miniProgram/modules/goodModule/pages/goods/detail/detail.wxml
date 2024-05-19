@@ -19,6 +19,7 @@
     <view class="desc">房间情况: {{house.orientation ? house.orientation : ''}}</view>
     <!-- 更新时间 -->
     <view class="desc">更新于: {{house.updateTime}}</view>
+    <text class="desc" user-select>房源id: {{house.id}}</text>
   </view>
 
   <!-- 商品的详细信息 -->
