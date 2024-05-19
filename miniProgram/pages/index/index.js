@@ -1,8 +1,7 @@
-import { houseAttachment } from '@/api/mockData'
-
 import { userStore } from '@/stores/userstore'
 import { ComponentWithStore } from 'mobx-miniprogram-bindings'
-
+const computedBehavior = require('miniprogram-computed').behavior
+import { getHouseList, getHouseInfoUnLogin, getBannerList } from '@/api/index'
 const subwayDetail = [
   {
     text: '12号线',
@@ -104,15 +103,6 @@ const rentRange = [
   { text: '3500-4000元', value: 6 },
   { text: '4000-10000元', value: 7 }
 ]
-const computedBehavior = require('miniprogram-computed').behavior
-import {
-  reqIndexData,
-  getHouseList,
-  getHouseDetail,
-  getSharedHouse,
-  getHouseInfoUnLogin,
-  getBannerList
-} from '@/api/index'
 
 ComponentWithStore({
   storeBindings: {
@@ -186,9 +176,9 @@ ComponentWithStore({
   },
   methods: {
     clickHouse(event) {
-      console.log(event)
+      // console.log(event)
       const { id: houseId } = event.currentTarget.dataset
-      console.log('token', this.data.token)
+      // console.log('token', this.data.token)
       if (!this.data.token) {
         // 如果没有登录,那么就阻止跳转
         this.setData({
@@ -253,7 +243,7 @@ ComponentWithStore({
 
     // 搜索的组件
     onSearch(e) {
-      console.log('用户搜索   ' + e.detail)
+      // console.log('用户搜索   ' + e.detail)
     },
 
     onChange(event) {
@@ -264,7 +254,7 @@ ComponentWithStore({
     },
 
     onClick(options) {
-      console.log(options)
+      // console.log(options)
       if (!this.data.token) {
         this.setData({
           show: true
@@ -276,8 +266,6 @@ ComponentWithStore({
       })
       this.getHouseListData()
     },
-
-    
 
     // 下面是从search.js页面过来的数据
 
@@ -297,6 +285,9 @@ ComponentWithStore({
     //   this.getBannerList()
     //   this.getHouseListData()
     // },
+    onShow() {
+      this.getHouseListData()
+    },
 
     // 监听页面的加载
     onLoad() {

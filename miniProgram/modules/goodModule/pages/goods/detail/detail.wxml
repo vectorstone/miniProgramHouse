@@ -1,11 +1,7 @@
 <view class="container goods-detail">
   <!-- 商品大图 -->
   <view class="banner-img">
-    <image
-      class="img"
-      src="../../../../../assets/mockImages/house.png"
-      bindtap="previewImg"
-    />
+    <image class="img" src="../../../../../assets/house.png" bindtap="previewImg" />
   </view>
 
   <!-- 商品的基本信息 -->
@@ -15,12 +11,12 @@
       <view class="price-origin-num">¥{{house.rent + 300}}</view>
     </view>
     <!-- 地铁线路 -->
-    <view class="title">地铁线路: {{house.subway}}</view>
+    <view class="title">地铁线路: {{house.subway ? house.subway : ''}}</view>
     <!-- 小区名称 -->
-    <view class="desc">小区名称: {{house.community}}</view>
+    <view class="desc">小区名称: {{house.community ? house.community : ''}}</view>
     <!-- 楼栋及房间号 -->
-    <view class="desc">楼栋及房间号: {{house.roomNumber}}</view>
-    <view class="desc">房间情况: {{house.orientation}}</view>
+    <view class="desc">楼栋及房间号: {{house.roomNumber ? house.roomNumber : ''}}</view>
+    <view class="desc">房间情况: {{house.orientation ? house.orientation : ''}}</view>
     <!-- 更新时间 -->
     <view class="desc">更新于: {{house.updateTime}}</view>
   </view>
@@ -56,13 +52,13 @@
     <view class="contact">
       <image
         class="contact-img"
-        src="../../../../../assets/mockImages/profile.jpg"
+        src="../../../../../assets/profile.jpg"
         show-menu-by-longpress="{{true}}"
         mode="widthFix"
       />
-      <view class="contact-text"><text  user-select>长按添加微信,获取详情 微信: 19353940638</text>
+      <view class="contact-text"
+        ><text user-select>长按添加微信,获取详情 微信: 19353940638</text>
       </view>
-      
     </view>
   </van-action-sheet>
 </view>

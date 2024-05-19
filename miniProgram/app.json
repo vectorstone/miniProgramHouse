@@ -1,23 +1,9 @@
 {
-  "pages": [
-    "pages/index/index",
-    "pages/category/category",
-    "pages/cart/cart",
-    "pages/my/my",
-    "pages/order/detail/detail",
-    "pages/order/list/list",
-    "pages/login/login",
-    "pages/settings/settings",
-    "pages/test/test",
-    "pages/test2/test2",
-    "pages/share/share",
-    "pages/search/search",
-    "pages/contact/contact"
-  ],
+  "pages": ["pages/index/index", "pages/my/my", "pages/login/login", "pages/share/share"],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#f3514f",
-    "navigationBarTitleText": "租个房",
+    "navigationBarTitleText": "租租租房",
     "navigationBarTextStyle": "white"
   },
   "tabBar": {
@@ -31,24 +17,6 @@
         "text": "首页",
         "iconPath": "assets/tabbar/index.png",
         "selectedIconPath": "assets/tabbar/index-active.png"
-      },
-      {
-        "pagePath": "pages/category/category",
-        "text": "分类",
-        "iconPath": "assets/tabbar/cate.png",
-        "selectedIconPath": "assets/tabbar/cate-active.png"
-      },
-      {
-        "pagePath": "pages/search/search",
-        "text": "搜索",
-        "iconPath": "assets/tabbar/cate.png",
-        "selectedIconPath": "assets/tabbar/cate-active.png"
-      },
-      {
-        "pagePath": "pages/cart/cart",
-        "text": "购物车",
-        "iconPath": "assets/tabbar/cart.png",
-        "selectedIconPath": "assets/tabbar/cart-active.png"
       },
       {
         "pagePath": "pages/my/my",
@@ -82,40 +50,18 @@
     {
       "root": "modules/settingModule",
       "name": "settingModule",
-      "pages": [
-        "pages/settings/settings",
-        "pages/address/add/index",
-        "pages/address/list/index",
-        "pages/profile/profile"
-      ]
+      "pages": ["pages/profile/profile"]
     },
     {
       "root": "modules/goodModule",
       "name": "goodModule",
-      "pages": ["pages/goods/list/list", "pages/goods/detail/detail"]
-    },
-    {
-      "root": "modules/orderPayModule",
-      "name": "orderPayModule",
-      "pages": ["pages/order/detail/detail", "pages/order/list/list"]
+      "pages": ["pages/goods/detail/detail"]
     }
   ],
   "preloadRule": {
-    "modules/orderPayModule/pages/order/detail/detail": {
-      "network": "all",
-      "packages": ["settingModule"]
-    },
     "pages/my/my": {
       "network": "all",
       "packages": ["settingModule"]
-    },
-    "pages/category/category": {
-      "network": "all",
-      "packages": ["goodModule"]
-    },
-    "pages/cart/cart": {
-      "network": "all",
-      "packages": ["orderPayModule"]
     }
   },
   "resolveAlias": {

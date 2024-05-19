@@ -25,6 +25,7 @@ Page({
 
       // 给用户提示
       toast({ title: '用户信息更新成功' })
+      wx.navigateBack()
     }
   },
 
@@ -43,12 +44,12 @@ Page({
     })
   },
   async chooseAvatar(event) {
-    console.log(event)
+    // console.log(event)
     const { avatarUrl } = event.detail
 
     const res = await reqUploadFile(avatarUrl, 'file')
 
-    console.log(res)
+    // console.log(res)
 
     this.setData({
       // 更新的userstore里面的信息
@@ -57,7 +58,7 @@ Page({
   },
   updateNickName(event) {
     // console.log(event)
-    const { nickname:name } = event.detail.value
+    const { nickname: name } = event.detail.value
     this.setData({
       // 更新的userstore里面的信息
       'userInfo.name': name,

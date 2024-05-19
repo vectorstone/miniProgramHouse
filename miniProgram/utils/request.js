@@ -157,7 +157,7 @@ class WxRequest {
 
   // 封装处理并发请求的方法
   all(...promise) {
-    console.log(promise)
+    // console.log(promise)
     // 通过展开运算符接受传递的参数
     // 那么展开运算符会将传入的参数转成数组
     return Promise.all(promise)

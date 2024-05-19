@@ -31,7 +31,7 @@ export const swipeCellBehavior = Behavior({
 
     // 当用户打开滑块时触发
     swipeCellOpen(event) {
-      console.log(event)
+      // console.log(event)
       // 获取删除swipe的id
       const { id } = event.target
       // 获取单元格实例

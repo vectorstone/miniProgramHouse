@@ -1,8 +1,7 @@
 // pages/goods/detail/index.js
-import { getHouseDetail } from '@/api/goods'
-import { reqAddCart, reqCartList } from '@/api/cart'
+import { getHouseDetail } from '@/modules/goodModule/api/house'
 // 导入behaviros
-import { userBehavior } from '@/behaviors/userBehavior'
+import { userBehavior } from '@/modules/goodModule/behaviors/userBehavior'
 Page({
   behaviors: [userBehavior],
   // 页面的初始数据
@@ -43,7 +42,7 @@ Page({
 
   onLoad(options) {
     // 获取传递过来的商品的id
-    console.log(options)
+    // console.log(options)
     this.houseId = options.houseId
     // 查询获取商品详细的数据
     this.houseDetail()
@@ -57,9 +56,9 @@ Page({
     // const res = await getHouseDetail('1777925917874634753')
     // 1780103377428987905 竖版视频
     const res = await getHouseDetail(this.houseId)
-    console.log(res)
+    // console.log(res)
     const { item: house } = res.data
-    console.log(house)
+    // console.log(house)
     this.setData({ house })
   },
 

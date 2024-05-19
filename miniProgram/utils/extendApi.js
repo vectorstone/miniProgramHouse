@@ -4,7 +4,7 @@
 const toast = ({
   title = '数据加载中',
   icon = 'none',
-  duration = 1000,
+  duration = 2000,
   mask = true
 } = {}) => {
   wx.showToast({

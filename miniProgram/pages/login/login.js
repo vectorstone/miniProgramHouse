@@ -2,7 +2,7 @@
 // 导入封装通用模块方法
 import { toast } from '../../utils/extendApi'
 // 导入接口 API 函数
-import { reqLogin, reqUserInfo, myLogin, wxLogin } from '@/api/user'
+import { reqLogin, reqUserInfo, myLogin, wxLogin } from '@/api/user' 
 // 导入本地存储 api
 import { setStorage } from '../../utils/storage'
 // 导入ComponentWithStore方法
@@ -28,7 +28,7 @@ ComponentWithStore({
     login: debounce(async function () {
       wx.login({
         success: async ({ code }) => {
-          console.log('code', code)
+          // console.log('code', code)
           if (code) {
             // 在获取到临时登录凭证 code 以后,需要传递给开发者服务器
             // 先执行自己的登录的接口
@@ -37,7 +37,7 @@ ComponentWithStore({
             //   username: 'gavin'
             // })
             const res = await wxLogin(code)
-            console.log(res)
+            // console.log(res)
             const { token } = res.data
             setStorage('token', token)
             // 将自定义登录态token 存储到Store对象
