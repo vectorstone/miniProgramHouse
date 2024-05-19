@@ -19,7 +19,7 @@
         <view class="onClick" slot="action" bind:tap="onClick">搜索</view>
       </van-search>
 
-      <van-search
+      <!-- <van-search
         wx:if="{{ isAdmin }}"
         model:value="{{ landloardName }}"
         placeholder="请输入房东姓名 . . ."
@@ -30,7 +30,7 @@
         model:value="{{ houseId }}"
         placeholder="请输入houseId"
         bind:search="onSearch"
-      />
+      /> -->
     </view>
 
     <van-dropdown-menu>
@@ -77,7 +77,7 @@
       <view class="goods_card_list">
         <!-- 列表分类卡片 -->
         <view class="goods_cart_container" wx:for="{{ houseList }}" wx:key="index">
-          <view bindtap="clickHouse" data-id="{{item.id}}">
+          <view bindtap="clickHouse" data-id="{{item.id}}" class="house_card">
             <!-- 商品图片 -->
             <image
               class="good_img"

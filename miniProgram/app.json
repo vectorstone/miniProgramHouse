@@ -1,5 +1,10 @@
 {
-  "pages": ["pages/index/index", "pages/my/my", "pages/login/login", "pages/share/share"],
+  "pages": [
+    "pages/index/index",
+    "pages/my/my",
+    "pages/login/login",
+    "pages/share/share"
+  ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#f3514f",
@@ -50,18 +55,25 @@
     {
       "root": "modules/settingModule",
       "name": "settingModule",
-      "pages": ["pages/profile/profile"]
+      "pages": [
+        "pages/profile/profile"
+      ]
     },
     {
       "root": "modules/goodModule",
       "name": "goodModule",
-      "pages": ["pages/goods/detail/detail"]
+      "pages": [
+        "pages/goods/detail/detail",
+        "pages/goods/list/list"
+      ]
     }
   ],
   "preloadRule": {
     "pages/my/my": {
       "network": "all",
-      "packages": ["settingModule"]
+      "packages": [
+        "settingModule"
+      ]
     }
   },
   "resolveAlias": {

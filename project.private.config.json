@@ -9,6 +9,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "list",
+          "pathName": "modules/goodModule/pages/goods/list/list",
+          "query": "shareId=1763906704587669505",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "pages/contact/contact",
           "pathName": "pages/contact/contact",
           "query": "",
