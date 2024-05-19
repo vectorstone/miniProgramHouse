@@ -9,6 +9,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "pages/contact/contact",
+          "pathName": "pages/contact/contact",
+          "query": "",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "/pages/test2/test2",
           "pathName": "/pages/test2/test2",
           "query": "",

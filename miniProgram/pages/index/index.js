@@ -110,7 +110,8 @@ import {
   getHouseList,
   getHouseDetail,
   getSharedHouse,
-  getHouseInfoUnLogin
+  getHouseInfoUnLogin,
+  getBannerList
 } from '@/api/index'
 
 ComponentWithStore({
@@ -276,11 +277,7 @@ ComponentWithStore({
       this.getHouseListData()
     },
 
-    onClose() {
-      this.setData({
-        show: false
-      })
-    },
+    
 
     // 下面是从search.js页面过来的数据
 
@@ -296,14 +293,16 @@ ComponentWithStore({
     onClose() {
       this.setData({ show: false })
     },
-    onShow() {
-      this.getHouseListData()
-    },
+    // onShow() {
+    //   this.getBannerList()
+    //   this.getHouseListData()
+    // },
 
     // 监听页面的加载
     onLoad() {
       // 在页面加载以后,调用获取首页数据的方法
       // this.getIndexData()
+      this.getBannerList()
       this.getHouseListData()
     },
 
@@ -367,8 +366,8 @@ ComponentWithStore({
         this.data.isLoading = false
         this.setData({
           total: res.data.houses.length,
-          houseList,
-          bannerList: houseAttachment
+          houseList
+          // bannerList: houseAttachment
         })
       } else {
         const res = await getHouseList(
@@ -382,10 +381,19 @@ ComponentWithStore({
         this.setData({
           total: res.data.items.total,
           // houseList: [...this.data.houseList, ...res.data.items.records],
-          houseList: [...this.data.houseList, ...houseList],
-          bannerList: houseAttachment
+          houseList: [...this.data.houseList, ...houseList]
+          // bannerList: houseAttachment
         })
       }
+    },
+
+    async getBannerList() {
+      const res = await getBannerList()
+      // bannerList
+      const { bannerList } = res.data
+      this.setData({
+        bannerList
+      })
     },
 
     // 转发功能

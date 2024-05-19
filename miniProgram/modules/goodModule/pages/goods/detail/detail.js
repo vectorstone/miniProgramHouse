@@ -14,10 +14,17 @@ Page({
     buyNow: '', // 是否立即购买, 加入购物车0,立即购买1
     allCount: ''
   },
-  bp(e) {
-    console.log(e)
-    this.videoContext = wx.createVideoContext('myVideo', this)
-    this.videoContext.requestFullScreen({direction:90})
+  // 点击关闭弹框时触发的回调
+  onClose() {
+    this.setData({ show: false })
+  },
+  addContact() {
+    this.setData({
+      show: true
+    })
+    // wx.navigateTo({
+    //   url: '/pages/contact/contact'
+    // })
   },
 
   // 点击大图可以预览的功能

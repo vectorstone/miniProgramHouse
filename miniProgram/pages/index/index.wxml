@@ -84,7 +84,6 @@
               src="{{item.headImage ? item.headImage : '../../assets/mockImages/house.png'}}"
               mode="widthFix"
             />
-            <!-- <video class="good_img" src="{{item.houseAttachment[0].url}}"></video> -->
 
             <!-- 房子详细信息 -->
             <view class="goods_item_info">

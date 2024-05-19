@@ -43,78 +43,26 @@
     <navigator url="/pages/index/index" open-type="switchTab">
       <van-goods-action-icon icon="wap-home-o" text="首页" />
     </navigator>
-    <!-- <navigator url="/pages/cart/cart" open-type="switchTab">
-      info就是购物车上方的红色的数量角标
-      <van-goods-action-icon icon="cart-o" text="购物车" info="{{ allCount }}" />
-    </navigator> -->
-    <!-- <van-goods-action-icon
-      open-type="contact"
-      icon="chat-o"
-      text="客服"
-      bind:click="onClickIcon"
-    /> -->
+
     <van-goods-action-button
       text="滴滴获取更多信息"
       type="warning"
-      bindtap="handleAddcart"
+      bindtap="addContact"
     />
     <!-- <van-goods-action-button text="立即购买" bindtap="handeGotoBuy" /> -->
   </van-goods-action>
 
-  <!-- 加入购物车、立即购买弹框 -->
-  <!-- show 控制弹框的隐藏和展示 -->
-  <!-- bind:close 点击关闭弹框时触发的回调 -->
   <van-action-sheet show="{{ show }}" bind:close="onClose">
-    <view class="sheet-wrapper">
-      <view class="goods-item">
-        <!-- 需要购买的商品图片 -->
-        <view class="mid">
-          <image class="img" src="{{house.imageUrl}}" />
-        </view>
-
-        <!-- 商品基本信息 -->
-        <view class="right">
-          <!-- 商品名字 -->
-          <view class="title"> {{house.name}} </view>
-          <!-- 商品价格 -->
-          <view class="buy">
-            <view class="price">
-              <view class="symbol">¥</view>
-              <view class="num">{{house.price}}</view>
-            </view>
-
-            <!-- 步进器组件控制购买数量 -->
-            <!-- 加入购物车0,立即购买1,立即购买的时候不允许多个商品,所以需要隐藏 -->
-            <view class="buy-btn" wx:if="{{buyNow === 0}}">
-              <!-- Stepper 步进器，由增加按钮、减少按钮和输入框组成，控制购买数量 -->
-              <van-stepper
-                value="{{ count }}"
-                integer
-                min="1"
-                max="200"
-                bind:change="onChangeGoodsCount"
-              />
-            </view>
-          </view>
-        </view>
+    <view class="contact">
+      <image
+        class="contact-img"
+        src="../../../../../assets/mockImages/profile.jpg"
+        show-menu-by-longpress="{{true}}"
+        mode="widthFix"
+      />
+      <view class="contact-text"><text  user-select>长按添加微信,获取详情 微信: 19353940638</text>
       </view>
-
-      <!-- 祝福语输入框 -->
-      <!-- <view class="time-wraper">
-        <view class="title">祝福语</view>
-        <textarea
-          model:value="{{ blessing }}"
-          bindinput="onTextAreaChange"
-          class="form-textarea"
-          placeholder="必填，写上您的祝福语，给心爱的他（她）送上你的祝福（请勿填写特殊符号或表情符号）"
-          name="textarea"
-        />
-      </view> -->
-
-      <!-- 确定按钮 -->
-      <!-- <view class="sheet-footer-btn">
-        <van-button block type="primary" round bindtap="handleSubmit"> 确定 </van-button>
-      </view> -->
+      
     </view>
   </van-action-sheet>
 </view>
