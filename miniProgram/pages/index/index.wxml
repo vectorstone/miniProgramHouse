@@ -110,13 +110,18 @@
       </view>
 
       <!-- 查看更多 -->
-      <view class="goods_more">
+      <view class="goods_more" wx:if="{{!isFinish}}">
         <view class="goods_more_btn">上拉加载更多</view>
       </view>
+      <!-- 数据是否加载完毕 -->
+    <view class="goods_more" wx:else>
+      <!-- <view class="goods_more_btn" hidden="{{ !isFinish }}">数据加载完毕~~~</view> -->
+      <view class="goods_more_btn" >数据加载完毕啦~~~</view>
+    </view>
     </view>
 
-    <!-- 数据是否加载完毕 -->
-    <view class="finish" hidden="{{ !isFinish }}">数据加载完毕~~~</view>
+    
+    
 
     <van-action-sheet show="{{ show }}" bind:close="onClose">
       <view class="title">

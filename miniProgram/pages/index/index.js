@@ -130,6 +130,7 @@ ComponentWithStore({
     guessList: [], // 猜你喜欢
     loading: true,
     houseList: [],
+    houseListAfterFilter: [],
     total: 0,
     isLoading: false, // 用来判断数据是否加载完毕
     isFinish: false, // 判断数据是否加载完毕
@@ -143,7 +144,7 @@ ComponentWithStore({
       community: '',
       endRent: 0,
       fileType: 0,
-      houseStatus: 0,
+      houseStatus: 1, // 前端里面1是上架,2是下架,后端里面0是上架,1是下架
       id: '',
       landlordName: '',
       orientation: '',
@@ -173,6 +174,7 @@ ComponentWithStore({
     rentRange,
     value1: 0
     // 下拉菜单
+    
   },
   methods: {
     clickHouse(event) {
@@ -262,7 +264,10 @@ ComponentWithStore({
         return
       }
       this.setData({
-        houseList: []
+        houseList: [],
+        page: 1,
+        total: 0,
+        isFinish: false
       })
       this.getHouseListData()
     },
@@ -312,9 +317,9 @@ ComponentWithStore({
       // 判断是否加载完毕,如果isLoading 等于true
       // 说明数据还没有加载完毕,不加载下一页的数据
       if (isLoading) return
-
+      console.log(houseList.length,Number(total))
       // 判断数据是否加载完毕
-      if (total === houseList.length) {
+      if (Number(total) === houseList.length) {
         // 如果相等,说明数据已经加载完毕
         // 如果数据加载完毕,需要给用户提示,同时不继续加载下一个数据
         this.setData({
@@ -322,6 +327,7 @@ ComponentWithStore({
         })
         return
       }
+      console.log("222233333333333333333333")
 
       // 对页码进行 + 1 的操作
       this.setData({
@@ -367,8 +373,17 @@ ComponentWithStore({
           this.data.searchVo
         )
         // 数据加载完毕
-        const houseList = res.data.items.records.filter((item) => item.houseStatus === 0)
+        // status 为 0说明还在架上
+        // const houseList = res.data.items.records.filter((item) => item.houseStatus === 0)
+        const houseList = res.data.items.records
         this.data.isLoading = false
+
+        console.log(res)
+
+        // 判断此时的page是否大于响应里面的page
+        // console.log(this.data.page,res.data.items.pages)
+        
+
         this.setData({
           total: res.data.items.total,
           // houseList: [...this.data.houseList, ...res.data.items.records],
