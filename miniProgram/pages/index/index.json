@@ -6,6 +6,6 @@
     "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
     "van-dropdown-item": "@vant/weapp/dropdown-item/index"
   },
-  "navigationBarTitleText": "租租租房",
+  "navigationBarTitleText": "田园邸舍",
   "enablePullDownRefresh": true
 }
