@@ -291,7 +291,7 @@ ComponentWithStore({
     //   this.getHouseListData()
     // },
     onShow() {
-      this.getHouseListData()
+      // this.getHouseListData()
     },
 
     // 监听页面的加载
@@ -362,7 +362,7 @@ ComponentWithStore({
         const houseList = res.data.houses.filter((item) => item.houseStatus === 0)
         this.data.isLoading = false
         this.setData({
-          total: res.data.houses.length,
+          // total: res.data.houses.length,
           houseList
           // bannerList: houseAttachment
         })
