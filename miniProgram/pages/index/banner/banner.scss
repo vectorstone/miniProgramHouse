@@ -16,9 +16,11 @@
 
     .img,
     .navigator {
-      height: 100%;
-      width: 100%;
+      // height: 100%;
+      // width: 100%;
       border-radius: 16rpx;
+      display: flex;
+      justify-content: center;
     }
   }
 

@@ -42,7 +42,7 @@ Page({
 
   onLoad(options) {
     // 获取传递过来的商品的id
-    // console.log(options)
+    console.log(options)
     this.houseId = options.houseId
     // 查询获取商品详细的数据
     this.houseDetail()
@@ -166,11 +166,11 @@ Page({
   // },
   // 转发功能
   onShareAppMessage() {
-    return {
-      title: '所有的怦然心动，都是你',
-      path: '/pages/index/index',
-      imageUrl: '../../assets/images/love.jpg'
-    }
+    // return {
+    //   title: '所有的怦然心动，都是你',
+    //   path: '/pages/index/index',
+    //   imageUrl: '../../assets/images/love.jpg'
+    // }
   },
 
   // 转发到朋友圈功能

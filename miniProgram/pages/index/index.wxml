@@ -52,7 +52,7 @@
       <van-dropdown-item
         id="item"
         title="{{ itemTitleRent }}"
-        value="{{ value1 }}"
+        value="{{ rentRangeValue }}"
         options="{{ rentRange }}"
         bind:change="change"
       >

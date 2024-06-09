@@ -6,6 +6,6 @@
     "van-dropdown-menu": "@vant/weapp/dropdown-menu/index",
     "van-dropdown-item": "@vant/weapp/dropdown-item/index"
   },
-  "navigationBarTitleText": "田园邸舍",
+  "navigationBarTitleText": "栖身小窝",
   "enablePullDownRefresh": true
 }

@@ -58,11 +58,11 @@ Page({
 
   // 转发功能
   onShareAppMessage() {
-    return {
-      title: '对方向你丢来了一堆房子',
-      path: '/pages/index/index',
-      imageUrl: '../../assets/images/love.jpg'
-    }
+    // return {
+    //   title: '对方向你丢来了一堆房子',
+    //   path: '/pages/index/index',
+    //   imageUrl: '../../assets/images/love.jpg'
+    // }
   },
 
   // 转发到朋友圈功能

@@ -172,7 +172,7 @@ ComponentWithStore({
     itemTitleSubway: '地铁线路',
     itemTitleRent: '租金范围',
     rentRange,
-    value1: 0
+    rentRangeValue: -1
     // 下拉菜单
     
   },
@@ -197,11 +197,12 @@ ComponentWithStore({
     // DropdownMenu下拉菜单
     // 对应的wxml里面应该这样写 bind:change="change" 不是bind:tap="change"
     change(options) {
+      console.log(this.data.rentRangeValue)
       const { detail } = options
       // options里面的detail是对应的子选项的value
-      // console.log(options)
+      console.log(options)
 
-      // 根据获取到的 value 方向的来获取对应的项目的 text
+      // 根据获取到的 value 来获取对应的项目的 text
       const rent = this.data.rentRange.find((item) => item.value === detail)
       this.setData({
         searchVo: { ...this.data.searchVo, rentRange: rent.text }
@@ -224,8 +225,30 @@ ComponentWithStore({
 
     onClickItem({ detail = {} }) {
       // {text: "巨峰路", id: 12}
-      // console.log(detail)
-      this.data.searchVo.subways.push(detail.text)
+      console.log(detail)
+      const {text} = detail
+      
+      const subWayIndex = this.data.searchVo.subways.indexOf(text)
+      if (subWayIndex > -1) {
+        // 如果数组里面已经包含了这个值的话,说明用户点击了取消的动作,那么就删除该值
+        // 进来这里面说明disable的属性是存在的,而且为false
+        // for (let i = 0;i<this.data.searchVo.subways.length;i++) {
+        //   if (this.data.searchVo.subways[i] === text) {
+        //     this.data.searchVo.subways.splice(i,1);
+        //     this.setData({
+        //       searchVo: this.data.searchVo 
+        //     })
+        //     i--;
+        //   }
+        // }
+        this.data.searchVo.subways.splice(subWayIndex,1)
+        this.setData({
+          searchVo: this.data.searchVo 
+        })
+      } else {
+        this.data.searchVo.subways.push(text)
+      }
+      
 
       const { activeId } = this.data
 
@@ -238,7 +261,8 @@ ComponentWithStore({
 
       this.setData({
         activeId,
-        searchVo: { ...this.data.searchVo, ...this.data.searchVo.subways }
+        // searchVo: { ...this.data.searchVo, ...this.data.searchVo.subways }
+        searchVo: this.data.searchVo 
       })
     },
     // TreeSelect分类选择
@@ -340,16 +364,37 @@ ComponentWithStore({
 
     // 监听页面的下拉刷新
     onPullDownRefresh() {
+      this.data.searchVo.community = ''
+      this.data.searchVo.endRent = 0,
+      this.data.searchVo.fileType =  0,
+      this.data.searchVo.houseStatus = 1, // 前端里面1是上架,2是下架,后端里面0是上架,1是下架
+      this.data.searchVo.id = '',
+      this.data.searchVo.landlordName = '',
+      this.data.searchVo.orientation = '',
+      this.data.searchVo.remark =  '',
+      // 2000-2500元
+      this.data.searchVo.rentRange = '',
+      this.data.searchVo.roomNumber = '',
+      this.data.searchVo.startRent = 0,
+      this.data.searchVo.subway = '',
+      this.data.searchVo.subways = []
       // 将数据进行重置
       this.setData({
         houseList: [],
         total: 0,
         isFinish: false,
-        page: 1
+        page: 1,
+        searchVo: this.data.searchVo,
+        // 清空,不然的话已经选择的地铁的线路不会消失
+        activeId: [],
+        rentRangeValue: -1
       })
 
       // 重新获取数据
       this.getHouseListData()
+
+      // 解决小程序下拉刷新以后不回弹的问题
+      wx.stopPullDownRefresh()
     },
 
     async getHouseListData() {
@@ -404,11 +449,11 @@ ComponentWithStore({
 
     // 转发功能
     onShareAppMessage() {
-      return {
-        title: '所有的怦然心动，都是你',
-        path: '/pages/index/index',
-        imageUrl: '../../assets/images/love.jpg'
-      }
+      // return {
+      //   title: '所有的怦然心动，都是你',
+      //   path: '/pages/index/index',
+      //   imageUrl: '../../assets/images/love.jpg'
+      // }
     },
 
     // 转发到朋友圈功能

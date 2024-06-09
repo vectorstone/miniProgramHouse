@@ -75,6 +75,8 @@ ComponentWithStore({
 
       // 重新获取数据
       this.getShareHouseInfo()
+      // 解决小程序下拉刷新以后不回弹的问题
+      wx.stopPullDownRefresh()
     },
     // 转发功能
     onShareAppMessage() {
@@ -86,6 +88,6 @@ ComponentWithStore({
     },
 
     // 转发到朋友圈功能
-    onShareTimeline() {}
+    // onShareTimeline() {}
   }
 })
