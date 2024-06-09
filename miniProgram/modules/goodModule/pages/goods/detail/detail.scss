@@ -73,13 +73,21 @@
   padding: 20rpx 16rpx;
   border-radius: 16rpx;
 }
+
 .img {
   border-radius: 16rpx;
 }
 .videos {
   border-radius: 16rpx;
   height: 606rpx;
-  width: 344rpx;
+  width: 342rpx;
+  display: flex;
+  justify-content: center;
+}
+.video-class {
+  margin-bottom: 20rpx;
+  display: flex;
+  justify-content: center;
 }
 
 // 加入购物车、立即购买弹框
@@ -196,4 +204,17 @@
   border-top-right-radius: 50rpx;
   border-bottom-right-radius: 50rpx;
   border-bottom-left-radius: 50rpx;
+}
+
+.loginTitle {
+  font-size: 16px;
+  font-weight: bold;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  padding: 50px;
+}
+
+.blank-class {
+  height: 40rpx;
 }

@@ -21,7 +21,10 @@
           url="/modules/goodModule/pages/goods/detail/detail?houseId={{item.houseId}}"
           hover-class="none"
         >
+        <view class="img-banner">
           <image class="img" mode="aspectFit" src="{{ item.url }}"></image>
+        </view>
+          
         </navigator>
       </swiper-item>
     </block>

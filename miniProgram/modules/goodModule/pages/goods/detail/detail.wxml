@@ -32,34 +32,41 @@
       bindtap="previewImg"
     />
     <!-- <video wx:else class="videos" src="{{item.url}}" muted enable-auto-rotation direction bindplay="bp" id="myVideo"></video> -->
-    <video wx:else class="videos" src="{{item.url}}" direction></video>
+    <view wx:else class="video-class">
+      <video class="videos" src="{{item.url}}" direction></video>
+    </view>
   </view>
+  <view class="blank-class"></view>
+</view>
 
-  <!-- 商品的底部商品导航 -->
-  <van-goods-action>
-    <navigator url="/pages/index/index" open-type="switchTab">
-      <van-goods-action-icon icon="wap-home-o" text="首页" />
-    </navigator>
+<!-- 商品的底部商品导航 -->
+<van-goods-action>
+  <navigator url="/pages/index/index" open-type="switchTab">
+    <van-goods-action-icon icon="wap-home-o" text="首页" />
+  </navigator>
 
-    <van-goods-action-button
-      text="滴滴获取更多信息"
-      type="warning"
-      bindtap="addContact"
+  <van-goods-action-button text="滴滴获取更多信息" type="warning" bindtap="addContact" />
+  <!-- <van-goods-action-button text="立即购买" bindtap="handeGotoBuy" /> -->
+</van-goods-action>
+
+<van-action-sheet show="{{ show }}" bind:close="onClose">
+  <view class="contact">
+    <image
+      class="contact-img"
+      src="../../../../../assets/profile.jpg"
+      show-menu-by-longpress="{{true}}"
+      mode="widthFix"
     />
-    <!-- <van-goods-action-button text="立即购买" bindtap="handeGotoBuy" /> -->
-  </van-goods-action>
+    <view class="contact-text"
+      ><text user-select>长按添加微信,获取详情 微信: 19353940638</text>
+    </view>
+  </view>
+</van-action-sheet>
 
-  <van-action-sheet show="{{ show }}" bind:close="onClose">
-    <view class="contact">
-      <image
-        class="contact-img"
-        src="../../../../../assets/profile.jpg"
-        show-menu-by-longpress="{{true}}"
-        mode="widthFix"
-      />
-      <view class="contact-text"
-        ><text user-select>长按添加微信,获取详情 微信: 19353940638</text>
-      </view>
+<view class="container-loginDialog">
+  <van-action-sheet show="{{ loginShow }}" bind:close="onCloseLogin">
+    <view class="loginTitle">
+      <button type="primary" bindtap="navigationToLogin">登录获取更多信息</button>
     </view>
   </van-action-sheet>
 </view>
