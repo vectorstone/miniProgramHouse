@@ -88,6 +88,6 @@ ComponentWithStore({
     },
 
     // 转发到朋友圈功能
-    // onShareTimeline() {}
+    onShareTimeline() {}
   }
 })
