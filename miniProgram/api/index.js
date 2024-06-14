@@ -4,6 +4,12 @@ import http from '../utils/http'
 export const getBannerList = () => http.get('/admin/house/banner')
 
 /**
+ * @description 获取地铁线路的信息
+ */
+export const getSubwayDetail = () => http.get('/admin/house/subway')
+
+
+/**
  * @description 未登录的时候,允许用户获取8条房源的信息
  */
 export const getHouseInfoUnLogin = () => http.get('/admin/house/unLogin/houseInfo')

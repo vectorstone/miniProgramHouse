@@ -1,97 +1,12 @@
 import { userStore } from '@/stores/userstore'
 import { ComponentWithStore } from 'mobx-miniprogram-bindings'
 const computedBehavior = require('miniprogram-computed').behavior
-import { getHouseList, getHouseInfoUnLogin, getBannerList } from '@/api/index'
-const subwayDetail = [
-  {
-    text: '12号线',
-    badge: 3,
-    dot: false,
-    disabled: false,
-    children: [
-      {
-        text: '东陆路',
-        id: 1,
-        disabled: false
-      },
-      {
-        text: '巨峰路',
-        id: 2
-      },
-      {
-        text: '杨高北路',
-        id: 3
-      }
-    ]
-  },
-  {
-    text: '6号线',
-    badge: 3,
-    dot: false,
-    disabled: false,
-    children: [
-      {
-        text: '东靖路',
-        id: 10,
-        disabled: false
-      },
-      {
-        text: '五洲大道',
-        id: 11
-      },
-      {
-        text: '巨峰路',
-        id: 12
-      }
-    ]
-  },
-  {
-    text: '9号线',
-    badge: 3,
-    dot: false,
-    disabled: false,
-    children: [
-      {
-        text: '台儿庄路',
-        id: 20,
-        disabled: false
-      },
-      {
-        text: '金桥',
-        id: 21
-      },
-      {
-        text: '蓝天路',
-        id: 22
-      }
-    ]
-  },
-  {
-    text: '10号线',
-    badge: 4,
-    dot: false,
-    disabled: false,
-    children: [
-      {
-        text: '双江路',
-        id: 30,
-        disabled: false
-      },
-      {
-        text: '高桥',
-        id: 31
-      },
-      {
-        text: '高桥西',
-        id: 32
-      },
-      {
-        text: '港城路',
-        id: 33
-      }
-    ]
-  }
-]
+import {
+  getHouseList,
+  getHouseInfoUnLogin,
+  getBannerList,
+  getSubwayDetail
+} from '@/api/index'
 
 const rentRange = [
   { text: '0-1000元', value: 0 },
@@ -143,7 +58,7 @@ ComponentWithStore({
     searchVo: {
       community: '',
       endRent: 0,
-      fileType: 0,
+      fileType: 1, // 1 只查询有图片和视频的房子
       houseStatus: 1, // 前端里面1是上架,2是下架,后端里面0是上架,1是下架
       id: '',
       landlordName: '',
@@ -165,7 +80,7 @@ ComponentWithStore({
     mainActiveIndex: 0,
     activeId: [],
     max: 2,
-    subwayDetail,
+    subwayDetail: [],
     // treeSelect的数据
 
     // 下拉菜单
@@ -174,9 +89,15 @@ ComponentWithStore({
     rentRange,
     rentRangeValue: -1
     // 下拉菜单
-    
   },
   methods: {
+    async getSubwayDetailData() {
+      const res = await getSubwayDetail()
+      const subwayDetail = JSON.parse(res.data.subwayDetail)
+      this.setData({
+        subwayDetail
+      })
+    },
     clickHouse(event) {
       // console.log(event)
       const { id: houseId } = event.currentTarget.dataset
@@ -226,8 +147,8 @@ ComponentWithStore({
     onClickItem({ detail = {} }) {
       // {text: "巨峰路", id: 12}
       console.log(detail)
-      const {text} = detail
-      
+      const { text } = detail
+
       const subWayIndex = this.data.searchVo.subways.indexOf(text)
       if (subWayIndex > -1) {
         // 如果数组里面已经包含了这个值的话,说明用户点击了取消的动作,那么就删除该值
@@ -236,19 +157,18 @@ ComponentWithStore({
         //   if (this.data.searchVo.subways[i] === text) {
         //     this.data.searchVo.subways.splice(i,1);
         //     this.setData({
-        //       searchVo: this.data.searchVo 
+        //       searchVo: this.data.searchVo
         //     })
         //     i--;
         //   }
         // }
-        this.data.searchVo.subways.splice(subWayIndex,1)
+        this.data.searchVo.subways.splice(subWayIndex, 1)
         this.setData({
-          searchVo: this.data.searchVo 
+          searchVo: this.data.searchVo
         })
       } else {
         this.data.searchVo.subways.push(text)
       }
-      
 
       const { activeId } = this.data
 
@@ -262,7 +182,7 @@ ComponentWithStore({
       this.setData({
         activeId,
         // searchVo: { ...this.data.searchVo, ...this.data.searchVo.subways }
-        searchVo: this.data.searchVo 
+        searchVo: this.data.searchVo
       })
     },
     // TreeSelect分类选择
@@ -279,8 +199,21 @@ ComponentWithStore({
       })
     },
 
+    closeDropdownItem() {
+      // 关闭地铁线路和租金范围的下拉选择菜单
+      this.selectComponent('#item1').toggle(false)
+      this.selectComponent('#item2').toggle(false)
+    },
+    onFocus() {
+      // 获取焦点的时候,如果下拉选择开关时打开的话,直接关闭
+      this.closeDropdownItem()
+    },
+
+    // 这个是点击搜索的按钮
     onClick(options) {
-      // console.log(options)
+      // 点击搜索按钮的时候,如果下拉选择开关时打开的话,直接关闭
+      this.closeDropdownItem()
+
       if (!this.data.token) {
         this.setData({
           show: true
@@ -323,6 +256,7 @@ ComponentWithStore({
       // 在页面加载以后,调用获取首页数据的方法
       // this.getIndexData()
       this.getBannerList()
+      this.getSubwayDetailData()
       this.getHouseListData()
     },
 
@@ -341,7 +275,7 @@ ComponentWithStore({
       // 判断是否加载完毕,如果isLoading 等于true
       // 说明数据还没有加载完毕,不加载下一页的数据
       if (isLoading) return
-      console.log(houseList.length,Number(total))
+      console.log(houseList.length, Number(total))
       // 判断数据是否加载完毕
       if (Number(total) === houseList.length) {
         // 如果相等,说明数据已经加载完毕
@@ -351,7 +285,7 @@ ComponentWithStore({
         })
         return
       }
-      console.log("222233333333333333333333")
+      console.log('222233333333333333333333')
 
       // 对页码进行 + 1 的操作
       this.setData({
@@ -365,19 +299,19 @@ ComponentWithStore({
     // 监听页面的下拉刷新
     onPullDownRefresh() {
       this.data.searchVo.community = ''
-      this.data.searchVo.endRent = 0,
-      this.data.searchVo.fileType =  0,
-      this.data.searchVo.houseStatus = 1, // 前端里面1是上架,2是下架,后端里面0是上架,1是下架
-      this.data.searchVo.id = '',
-      this.data.searchVo.landlordName = '',
-      this.data.searchVo.orientation = '',
-      this.data.searchVo.remark =  '',
-      // 2000-2500元
-      this.data.searchVo.rentRange = '',
-      this.data.searchVo.roomNumber = '',
-      this.data.searchVo.startRent = 0,
-      this.data.searchVo.subway = '',
-      this.data.searchVo.subways = []
+      ;(this.data.searchVo.endRent = 0),
+        (this.data.searchVo.fileType = 0),
+        (this.data.searchVo.houseStatus = 1), // 前端里面1是上架,2是下架,后端里面0是上架,1是下架
+        (this.data.searchVo.id = ''),
+        (this.data.searchVo.landlordName = ''),
+        (this.data.searchVo.orientation = ''),
+        (this.data.searchVo.remark = ''),
+        // 2000-2500元
+        (this.data.searchVo.rentRange = ''),
+        (this.data.searchVo.roomNumber = ''),
+        (this.data.searchVo.startRent = 0),
+        (this.data.searchVo.subway = ''),
+        (this.data.searchVo.subways = [])
       // 将数据进行重置
       this.setData({
         houseList: [],
@@ -392,6 +326,7 @@ ComponentWithStore({
 
       // 重新获取数据
       this.getHouseListData()
+      this.getSubwayDetailData()
 
       // 解决小程序下拉刷新以后不回弹的问题
       wx.stopPullDownRefresh()
@@ -427,7 +362,6 @@ ComponentWithStore({
 
         // 判断此时的page是否大于响应里面的page
         // console.log(this.data.page,res.data.items.pages)
-        
 
         this.setData({
           total: res.data.items.total,

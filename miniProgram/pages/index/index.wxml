@@ -14,6 +14,7 @@
         placeholder="请输入小区名称 . . ."
         bind:search="onSearch"
         bind:change="onChange"
+        bind:focus="onFocus"
         use-action-slot
       >
         <view class="onClick" slot="action" bind:tap="onClick">搜索</view>
@@ -36,7 +37,7 @@
     <van-dropdown-menu>
       <!-- 地铁线路选择 -->
       <!-- <van-dropdown-item value="{{ value1 }}" options="{{ option1 }}" /> -->
-      <van-dropdown-item id="item" title="{{ itemTitleSubway }}">
+      <van-dropdown-item id="item1" title="{{ itemTitleSubway }}" close-on-click-outside>
         <view>
           <van-tree-select
             items="{{ subwayDetail }}"
@@ -50,7 +51,7 @@
 
       <!-- 租金范围 -->
       <van-dropdown-item
-        id="item"
+        id="item2"
         title="{{ itemTitleRent }}"
         value="{{ rentRangeValue }}"
         options="{{ rentRange }}"
@@ -114,14 +115,11 @@
         <view class="goods_more_btn">上拉加载更多</view>
       </view>
       <!-- 数据是否加载完毕 -->
-    <view class="goods_more" wx:else>
-      <!-- <view class="goods_more_btn" hidden="{{ !isFinish }}">数据加载完毕~~~</view> -->
-      <view class="goods_more_btn" >数据加载完毕啦~~~</view>
+      <view class="goods_more" wx:else>
+        <!-- <view class="goods_more_btn" hidden="{{ !isFinish }}">数据加载完毕~~~</view> -->
+        <view class="goods_more_btn">数据加载完毕啦~~~</view>
+      </view>
     </view>
-    </view>
-
-    
-    
 
     <van-action-sheet show="{{ show }}" bind:close="onClose">
       <view class="title">
