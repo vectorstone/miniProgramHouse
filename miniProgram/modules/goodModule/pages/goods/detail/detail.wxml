@@ -33,7 +33,16 @@
     />
     <!-- <video wx:else class="videos" src="{{item.url}}" muted enable-auto-rotation direction bindplay="bp" id="myVideo"></video> -->
     <view wx:else class="video-class">
-      <video class="videos" src="{{item.url}}" direction></video>
+      <video
+        id="{{item.id}}"
+        class="videos"
+        src="{{item.url}}"
+        direction
+        show-mute-btn
+        enable-play-gesture
+        bindplay="handleVideoTap"
+        bindfullscreenchange="handleFullScreenChange"
+      ></video>
     </view>
   </view>
   <view class="blank-class"></view>

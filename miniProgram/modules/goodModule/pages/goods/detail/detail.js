@@ -21,6 +21,25 @@ ComponentWithStore({
     loginShow: false
   },
   methods: {
+    handleVideoTap: function (e) {
+      console.log(e)
+      const { id } = e.currentTarget
+      // console.log(id)
+      const videoContext = wx.createVideoContext(id + '', this)
+      console.log(videoContext)
+      videoContext.requestFullScreen()
+      videoContext.play()
+    },
+
+    handleFullScreenChange: function (e) {
+      console.log('Full screen change:', e)
+      const { id } = e.currentTarget
+      if (!e.detail.fullScreen) {
+        // 当退出全屏时
+        const videoContext = wx.createVideoContext(id + '', this)
+        videoContext.pause()
+      }
+    },
     // 监听页面的下拉刷新
     onPullDownRefresh() {
       if (!this.data.token) {

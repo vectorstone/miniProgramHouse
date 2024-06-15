@@ -60,9 +60,9 @@
   .desc {
     font-size: 14px;
     color: #999999;
-    overflow: hidden;
+    // overflow: hidden;
     text-overflow: ellipsis;
-    white-space: nowrap;
+    white-space: wrap;
   }
 }
 
