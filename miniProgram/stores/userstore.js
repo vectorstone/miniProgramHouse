@@ -15,8 +15,15 @@ export const userStore = observable({
 
   roleList: getStorage('roleList') || [],
 
+  // isExpire: getStorage('isExpire') || false,
+
   // 定义action
   // setToken 用来修改,更新token
+  // setIsExpire: action(function (flag) {
+  //   this.isExpire = flag
+  // }),
+
+
   setToken: action(function (token) {
     // 在调用 setToken 方法时,需要传入 token 数据进行赋值
     this.token = token

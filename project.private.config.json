@@ -9,6 +9,13 @@
     "miniprogram": {
       "list": [
         {
+          "name": "modules/goodModule/pages/goods/list/list",
+          "pathName": "modules/goodModule/pages/goods/list/list",
+          "query": "shareId=1803813078310662146",
+          "launchMode": "default",
+          "scene": null
+        },
+        {
           "name": "detail",
           "pathName": "modules/goodModule/pages/goods/detail/detail",
           "query": "houseId=1799720588288798721",

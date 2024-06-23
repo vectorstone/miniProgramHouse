@@ -1,6 +1,8 @@
 import { userStore } from '@/stores/userstore'
 import { ComponentWithStore } from 'mobx-miniprogram-bindings'
 const computedBehavior = require('miniprogram-computed').behavior
+import { getStorage, clearStorage, setStorage } from '@/utils/storage'
+import { modal, toast } from '@/utils/extendApi'
 import {
   getHouseList,
   getHouseInfoUnLogin,
@@ -22,7 +24,7 @@ const rentRange = [
 ComponentWithStore({
   storeBindings: {
     store: userStore,
-    fields: ['token', 'userPermsList', 'roleList']
+    fields: ['token', 'userPermsList', 'roleList', 'isExpire']
   },
 
   computed: {
@@ -45,7 +47,6 @@ ComponentWithStore({
     guessList: [], // 猜你喜欢
     loading: true,
     houseList: [],
-    houseListAfterFilter: [],
     total: 0,
     isLoading: false, // 用来判断数据是否加载完毕
     isFinish: false, // 判断数据是否加载完毕
@@ -87,8 +88,9 @@ ComponentWithStore({
     itemTitleSubway: '地铁线路',
     itemTitleRent: '租金范围',
     rentRange,
-    rentRangeValue: -1
+    rentRangeValue: -1,
     // 下拉菜单
+    isExpire: false
   },
   methods: {
     async getSubwayDetailData() {
@@ -248,7 +250,9 @@ ComponentWithStore({
     //   this.getHouseListData()
     // },
     onShow() {
-      // this.getHouseListData()
+      if (this.data.houseList.length === 0) {
+        this.getHouseListData()
+      }
     },
 
     // 监听页面的加载
@@ -333,6 +337,7 @@ ComponentWithStore({
     },
 
     async getHouseListData() {
+      // setStorage('isExpire',false)
       // 数据真正的请求中
       this.data.isLoading = true
 
@@ -355,6 +360,7 @@ ComponentWithStore({
         // 数据加载完毕
         // status 为 0说明还在架上
         // const houseList = res.data.items.records.filter((item) => item.houseStatus === 0)
+
         const houseList = res.data.items.records
         this.data.isLoading = false
 

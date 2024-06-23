@@ -9,7 +9,7 @@
           <image
             class="good_img"
             src="{{item.headImage ? item.headImage : '../../../../../assets/house.png'}}"
-            mode="widthFix"
+            mode="scaleToFill"
           />
 
           <!-- 房子详细信息 -->

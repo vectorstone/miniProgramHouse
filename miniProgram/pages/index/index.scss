@@ -134,8 +134,6 @@
   color: rgba(35, 38, 40, 0.7);
 }
 
-
-
 /* components/goods-card/goods-card.wxss */
 
 .goods_cart_container {
@@ -143,6 +141,8 @@
   margin-top: 18rpx;
   background: #fff;
   border-radius: 18rpx;
+  // 这个是添加图片边上的阴影的样式的代码
+  box-shadow: 0 5rpx 5rpx rgba(0, 0, 0, 0.3);
 }
 
 .good_img {
@@ -177,7 +177,7 @@
 }
 
 .goods_item_info .goods_item_info_promo {
-  padding-top: 20rpx;
+  padding-top: 10rpx;
   padding-bottom: 3px;
   font-size: 12px;
   color: #71797f;
@@ -189,7 +189,7 @@
 .goods_item_info_bottom {
   display: flex;
   line-height: 50rpx;
-  margin-top: 20rpx;
+  margin-top: 10rpx;
 }
 
 .goods_item_info_bottom .goods_image {

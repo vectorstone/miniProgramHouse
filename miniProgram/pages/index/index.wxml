@@ -12,7 +12,7 @@
       <van-search
         value="{{ searchVo.community }}"
         placeholder="请输入小区名称 . . ."
-        bind:search="onSearch"
+        bind:search="onClick"
         bind:change="onChange"
         bind:focus="onFocus"
         use-action-slot
@@ -96,6 +96,8 @@
               >
               <!-- 房间朝向 -->
               <text class="goods_item_info_promo">{{item.orientation}}</text>
+              <!-- 更新时间 -->
+              <text class="goods_item_info_promo">更新于{{item.updateTime}}</text>
               <!-- 租金 -->
               <view class="goods_item_info_bottom">
                 <view class="goods_item_info_price">

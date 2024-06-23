@@ -1,5 +1,5 @@
 import WxRequest from './request'
-import { getStorage, clearStorage } from './storage'
+import { getStorage, clearStorage, setStorage } from './storage'
 import { modal, toast } from './extendApi'
 import { env } from './env'
 // ===========一下是实例化的代码
@@ -9,9 +9,8 @@ import { env } from './env'
 const instance = new WxRequest({
   // baseURL: 'https://gmall-prod.atguigu.cn/mall-api',
   // baseURL: env.baseURL, // 先不用这个env的配置,方便自己本地和线上进行调试
-  // baseURL: 'http://www.nicehouse.cc:8888',
   baseURL: 'https://www.nicehouse.cc/prod-api',
-  // baseURL: 'http://localhost:8888',
+  // baseURL: 'http://192.168.6.184:8888',
   timeout: 15000
   // 如果整个项目里面都不希望使用loading的效果,可以在进行实例化的时候传入isLoading为false
   // isLoading: false
@@ -51,7 +50,13 @@ instance.interceptors.response = async (response) => {
   switch (data.code) {
     case 200:
       return data
-    case 208:
+    case 209:
+      const isExpireAgain = getStorage('isExpire')
+
+      if (isExpireAgain) {
+        return Promise.reject(response)
+      }
+      setStorage('isExpire', true)
       const res = await modal({
         content: '鉴权失败,请重新登录',
         showCancel: false // 不显示取消按钮
@@ -60,12 +65,12 @@ instance.interceptors.response = async (response) => {
       if (res) {
         // 清除之前失效的token,同时要清除本地存储的全部信息
         clearStorage()
+        setStorage('isExpire', false)
         wx.navigateTo({
           url: '/pages/login/login'
         })
       }
       return Promise.reject(response)
-
     default:
       toast({
         title: '程序出现异常,请联系客服或稍后重试'
